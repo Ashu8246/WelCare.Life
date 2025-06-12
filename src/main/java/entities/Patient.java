@@ -1,5 +1,6 @@
 package entities;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
@@ -10,14 +11,15 @@ public class Patient
 {
     private String fname;
     private String lname;
+    @Column(unique = true)
     private String email;
     private String password;
     private String phone;
+    private String bloodgroup;
     private String gender;
     private String address;
     private String dob;
     private String city;
-    private String state;
     @Id
     private String p_id;
 
@@ -77,13 +79,6 @@ public class Patient
         this.city = city;
     }
 
-    public String getState() {
-        return state;
-    }
-
-    public void setState(String state) {
-        this.state = state;
-    }
 
     public String getPid() {
         return p_id;
@@ -107,5 +102,12 @@ public class Patient
 
     public void setGender(String gender) {
         this.gender = gender;
+    }
+
+    public String getBloodgroup() {
+        return bloodgroup;
+    }
+    public void setBloodgroup(String bloodgroup) {
+        this.bloodgroup = bloodgroup;
     }
 }

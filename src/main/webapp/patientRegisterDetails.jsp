@@ -93,11 +93,11 @@
 </nav>
 <div class="register-card">
   <h2>Patient Registration</h2>
-  <form id="registerForm">
+  <form action="PatientDetailsChecker" method="post" id="registerForm">
     <div class="row g-3">
       <div class="col-md-6">
         <label for="patientId" class="form-label">Patient ID</label>
-        <input type="text" name="p_id" value="<%=p_id%>" class="form-control" id="patientId" disabled>
+        <input type="text" name="p_id" value="<%=p_id%>" class="form-control" id="patientId" >
       </div>
       <div class="col-md-6">
         <label for="firstName" class="form-label">First Name</label>
@@ -128,10 +128,26 @@
           <option value="other">Other</option>
         </select>
       </div>
+      <div class="col-md-6">
+        <label for="gender" class="form-label">Blood Group</label>
+        <select id="gender" name="bloodgroup" class="form-select" required>
+          <option value="" selected disabled>Select Blood Group</option>
+          <option value="">-- Select Blood Group --</option>
+          <option value="A+">A+</option>
+          <option value="A-">A−</option>
+          <option value="B+">B+</option>
+          <option value="B-">B−</option>
+          <option value="AB+">AB+</option>
+          <option value="AB-">AB−</option>
+          <option value="O+">O+</option>
+          <option value="O-">O−</option>
 
-      <div class="d-grid mt-4">
-        <button type="submit" class="btn btn-primary">Register</button>
+        </select>
       </div>
+      <div class="d-grid mt-4">
+        <input type="submit" class="btn btn-primary" value="Register">
+      </div>
+    </div>
   </form>
 </div>
 
@@ -140,20 +156,6 @@
 
 <!-- Simple Form Validation -->
 <script>
-  document.getElementById("registerForm").addEventListener("submit", function (e) {
-    e.preventDefault();
-
-    const password = document.getElementById("password").value;
-    const confirmPassword = document.getElementById("confirmPassword").value;
-
-    if (password !== confirmPassword) {
-      alert("Passwords do not match!");
-      return;
-    }
-
-    alert("Registration Successful!");
-    // You can send data to the server here
-  });
 </script>
 </body>
 </html>

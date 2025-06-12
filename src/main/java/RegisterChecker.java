@@ -48,7 +48,10 @@ public class RegisterChecker extends HttpServlet
                     HttpSession session = req.getSession(true);
                     session.setAttribute("fname", fname);
                     session.setAttribute("p_id", patient.getPid());
-                    resp.sendRedirect("registerDetails.jsp");
+                    resp.sendRedirect("patientRegisterDetails.jsp");
+                }
+                else {
+                    resp.sendRedirect("index.jsp");
                 }
             }
             else if (role.equalsIgnoreCase("doctor"))
