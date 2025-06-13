@@ -1,11 +1,11 @@
 <%--
   Created by IntelliJ IDEA.
   User: ashug
-  Date: 13-06-2025
-  Time: 04:53 am
+  Date: 12-06-2025
+  Time: 04:24 pm
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %><!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -74,7 +74,7 @@
 
 <%
   String fname = (String)session.getAttribute("fname");
-  String p_id = (String) session.getAttribute("p_id");
+  String d_id = (String) session.getAttribute("d_id");
 %>
 
 
@@ -92,12 +92,12 @@
   </div>
 </nav>
 <div class="register-card">
-  <h2>Patient Registration</h2>
+  <h2>Doctor Registration</h2>
   <form action="DetailsChecker" method="post" id="registerForm">
     <div class="row g-3">
       <div class="col-md-6">
         <label for="patientId" class="form-label">Patient ID</label>
-        <input type="text" name="p_id" value="<%=p_id%>" class="form-control" id="patientId" >
+        <input type="text" name="p_id" value="<%=d_id%>" class="form-control" id="patientId" disabled>
       </div>
       <div class="col-md-6">
         <label for="firstName" class="form-label">First Name</label>
@@ -105,7 +105,7 @@
       </div>
       <div class="col-md-6">
         <label for="dob" class="form-label">Date of Birth</label>
-        <input type="date" name="age" class="form-control" id="dob" required>
+        <input type="date" name="dob" class="form-control" id="dob" required>
       </div>
       <div class="col-md-6">
         <label for="phone" class="form-label">Phone</label>
@@ -129,21 +129,31 @@
         </select>
       </div>
       <div class="col-md-6">
-        <label for="gender" class="form-label">Blood Group</label>
-        <select id="gender" name="bloodgroup" class="form-select" required>
-          <option value="" selected disabled>Select Blood Group</option>
-          <option value="">-- Select Blood Group --</option>
-          <option value="A+">A+</option>
-          <option value="A-">A−</option>
-          <option value="B+">B+</option>
-          <option value="B-">B−</option>
-          <option value="AB+">AB+</option>
-          <option value="AB-">AB−</option>
-          <option value="O+">O+</option>
-          <option value="O-">O−</option>
+        <label for="gender" class="form-label">Experience (in years)</label>
+        <select id="gender" name="experience" class="form-select" required>
+          <option value="">-- Select Experience Range --</option>
+          <option value="0-10">0–10</option>
+          <option value="11-20">11–20</option>
+          <option value="21-30">21–30</option>
+          <option value="31-40">31–40</option>
+          <option value="41-50">41–50</option>
+          <option value="51-60">51–60</option>
+          <option value="61-70">61–70</option>
+          <option value="71-80">71–80</option>
+          <option value="81-90">81–90</option>
+          <option value="91-100">91–100</option>
 
         </select>
       </div>
+      <div class="col-md-6">
+        <label for="patientId" class="form-label">Qualification</label>
+        <input type="text" name="qualification" class="form-control" id="patientId" >
+      </div>
+      <div class="col-md-6">
+        <label for="patientId" class="form-label">spealization</label>
+        <input type="text" name="spelization" class="form-control" id="patientId" >
+      </div>
+
       <div class="d-grid mt-4">
         <input type="submit" class="btn btn-primary" value="Register">
       </div>

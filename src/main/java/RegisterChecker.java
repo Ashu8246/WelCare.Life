@@ -1,4 +1,6 @@
+import entities.Doctor;
 import entities.Patient;
+import model.DoctorRegisterAuthenticator;
 import model.PatientRegisterAuthenticator;
 
 import javax.servlet.ServletException;
@@ -56,7 +58,26 @@ public class RegisterChecker extends HttpServlet
             }
             else if (role.equalsIgnoreCase("doctor"))
             {
+                Doctor doctor = new Doctor();
+                doctor.setFname(fname);
+                doctor.setLname(lname);
+                doctor.setPassword(password);
+                doctor.setEmail(email);
+                doctor.setRole(role);
 
+                DoctorRegisterAuthenticator auth = new DoctorRegisterAuthenticator();
+                boolean regis = auth.isRegister(doctor);
+
+                if(regis)
+                {
+                    HttpSession session = req.getSession(true);
+                    session.setAttribute("fname", fname);
+                    session.setAttribute("d_id", doctor.getD_id());
+                    resp.sendRedirect("doctorRegisterDetails.jsp");
+                }
+                else {
+                    resp.sendRedirect("index.jsp");
+                }
             }
         }
         else

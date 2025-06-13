@@ -100,11 +100,11 @@
           <div class="row g-3 mb-3">
             <div class="col">
               <label for="firstName" class="form-label">First Name</label>
-              <input type="text" name="fname" class="form-control" id="firstName" placeholder="First name" required>
+              <input type="text" name="fname" class="form-control" id="firstName" placeholder="First name" required pattern="^[A-Za-z0-9]+$">
             </div>
             <div class="col">
               <label for="lastName" class="form-label">Last Name</label>
-              <input type="text" name="lname" class="form-control" id="lastName" placeholder="Last name" required>
+              <input type="text" name="lname" class="form-control" id="lastName" placeholder="Last name" required pattern="^[A-Za-z0-9]+$">
             </div>
           </div>
           <div class="mb-3">

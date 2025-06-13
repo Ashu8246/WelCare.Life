@@ -1,28 +1,33 @@
 package entities;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import org.hibernate.annotations.ColumnDefault;
 
 import javax.naming.Name;
 
 @Entity(name = "doctors")
+@Table(name = "doctors")
 public class Doctor
 {
     @Id
-    long id;
     String d_id;
     String fname;
     String lname;
     String address;
+    String city;
+    @Column(unique = true)
     String email;
     String phone;
     String password;
     String gender;
-    String age;
+    String dob;
     String specialization;
     String qualification;
-    String status;
-    String verified;
+    int status;
+    int verified;
     String exprience;
     String role;
 
@@ -40,14 +45,6 @@ public class Doctor
 
     public void setExprience(String exprience) {
         this.exprience = exprience;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Long getId() {
-        return id;
     }
 
     public String getD_id() {
@@ -114,12 +111,12 @@ public class Doctor
         this.gender = gender;
     }
 
-    public String getAge() {
-        return age;
+    public String getDob() {
+        return dob;
     }
 
-    public void setAge(String age) {
-        this.age = age;
+    public void setDob(String dob) {
+        this.dob = dob;
     }
 
     public String getSpecialization() {
@@ -138,19 +135,27 @@ public class Doctor
         this.qualification = qualification;
     }
 
-    public String getStatus() {
+    public int getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(int status) {
         this.status = status;
     }
 
-    public String getVerified() {
+    public int getVerified() {
         return verified;
     }
 
-    public void setVerified(String verified) {
+    public void setVerified(int verified) {
         this.verified = verified;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
     }
 }
