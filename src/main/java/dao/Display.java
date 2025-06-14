@@ -10,9 +10,8 @@ public class Display
     Session session = DbProvider.getSession();
     public Doctor getDoctordetails(String d_id) {
 
-        session.beginTransaction().begin();
+        session.beginTransaction();
         Doctor doctor =  session.find(Doctor.class, d_id);
-        System.out.println("doctor id : " + doctor.getD_id());
         session.getTransaction().commit();
         return doctor;
     }

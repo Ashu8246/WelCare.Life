@@ -39,6 +39,10 @@ public class PatientRegisterAuthenticator
                 session.persist(patient);
 
                 tx.commit();
+                if(tx.isActive())
+                {
+                    tx.rollback();
+                }
             }
             catch (Exception ex)
             {
@@ -73,6 +77,10 @@ public class PatientRegisterAuthenticator
 
                 i =  query.executeUpdate();
                 tx.commit();
+                if(tx.isActive())
+                {
+                    tx.rollback();
+                }
 
                 if(i>0)
                 {

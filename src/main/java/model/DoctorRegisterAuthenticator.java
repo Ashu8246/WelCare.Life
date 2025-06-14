@@ -36,9 +36,7 @@ public class DoctorRegisterAuthenticator
                 }
 
                 Transaction tx = session.beginTransaction();
-
                 session.persist(doctor);
-
                 tx.commit();
             }
             catch (Exception ex)
@@ -74,8 +72,9 @@ public class DoctorRegisterAuthenticator
 
                 i =  query.executeUpdate();
                 tx.commit();
-
-
+                if(tx.isActive()) {
+                    tx.rollback();
+                }
 
                 if(i>0)
                 {
