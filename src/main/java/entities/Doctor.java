@@ -28,7 +28,7 @@ public class Doctor
     String qualification;
     int status;
     int verified;
-    String exprience;
+    String experience;
     String role;
 
     public String getRole() {
@@ -39,12 +39,12 @@ public class Doctor
         this.role = role;
     }
 
-    public String getExprience() {
-        return exprience;
+    public String getExperience() {
+        return experience;
     }
 
-    public void setExprience(String exprience) {
-        this.exprience = exprience;
+    public void setExperience(String experience) {
+        this.experience = experience;
     }
 
     public String getD_id() {

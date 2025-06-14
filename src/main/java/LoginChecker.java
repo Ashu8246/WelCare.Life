@@ -18,4 +18,9 @@ public class LoginChecker extends HttpServlet
         System.out.println("Inside Checker doPost");
         resp.sendRedirect("index.jsp");
     }
+
+    String display()
+    {
+        return "Namaskaar mitro";
+    }
 }

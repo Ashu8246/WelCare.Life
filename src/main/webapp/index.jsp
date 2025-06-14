@@ -1,4 +1,4 @@
-<%--
+<%@ page import="dao.Display" %><%--
   Created by IntelliJ IDEA.
   User: ashug
   Date: 12-06-2025
@@ -9,41 +9,58 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>WelCare.Life</title>
 
-  <!-- Bootstrap 5 & Icons -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet" />
-  <link rel="stylesheet" href="css/style.css"/>
+
+  <link href="css/style.css" rel="stylesheet">
+
+  <title>WelCare.Life</title>
 </head>
-<body class="bg-light">
-
+<body>
 <!-- Navbar -->
-<nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm fixed-top">
+<nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm fixed-top">
   <div class="container">
-    <a class="navbar-brand d-flex align-items-center fw-bold" href="#">
+    <!-- Logo + Brand -->
+    <a class="navbar-brand d-flex align-items-center" href="#">
 
-      WelCare.<span class="text-primary">Life</span>
+      <span class="fw-bold text-dark">WelCare<span class="text-primary">.Life</span></span>
     </a>
-    <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navMenu">
+
+    <!-- Toggler -->
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMenu">
       <span class="navbar-toggler-icon"></span>
     </button>
 
-    <div class="collapse navbar-collapse" id="navMenu">
-      <ul class="navbar-nav ms-auto me-3">
-        <li class="nav-item"><a class="nav-link" href="#">Home</a></li>
-        <li class="nav-item"><a class="nav-link" href="#">Profile</a></li>
-        <li class="nav-item"><a class="nav-link" href="#">About</a></li>
-        <li class="nav-item"><a class="nav-link" href="#">Contact</a></li>
+    <!-- Navbar content -->
+    <div class="collapse navbar-collapse" id="navbarMenu">
+      <!-- Nav links -->
+      <ul class="navbar-nav me-auto mb-2 mb-md-0 ms-md-4">
+        <li class="nav-item">
+          <a class="nav-link active" href="#home">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#profile">Profile</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#about">About</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#contact">Contact</a>
+        </li>
       </ul>
-      <button class="btn btn-link text-dark me-2" data-bs-toggle="modal" data-bs-target="#loginModal">
-        <i class="bi bi-box-arrow-in-right"></i> Login
-      </button>
-      <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#signupModal">
-        Sign Up
-      </button>
+
+      <!-- Auth Buttons -->
+      <div class="d-flex gap-2">
+        <button class="btn btn-outline-primary d-flex align-items-center" data-bs-toggle="modal" data-bs-target="#loginModal">
+          <i class="bi bi-box-arrow-in-right me-2"></i>Login
+        </button>
+        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#signupModal">Sign Up</button>
+      </div>
 
     </div>
   </div>
@@ -74,14 +91,13 @@
               <option value="doctor">Doctor</option>
               <option value="patient">Patient</option>
             </select>
-
           </div>
           <div class="d-grid mt-4">
-            <button type="submit" class="btn btn-primary fw-semibold">Login</button>
+            <button type="submit" class="btn btn-primary fw-semibold">Sign In</button>
           </div>
         </form>
         <div class="text-center mt-3 small">
-          Don’t have an account? <a href="#" class="text-decoration-none">Sign up</a>
+          Don’t have an account? <a href="#" data-bs-toggle="modal" data-bs-target="#signupModal">Sign up</a>
         </div>
       </div>
     </div>
@@ -100,11 +116,11 @@
           <div class="row g-3 mb-3">
             <div class="col">
               <label for="firstName" class="form-label">First Name</label>
-              <input type="text" name="fname" class="form-control" id="firstName" placeholder="First name" required pattern="^[A-Za-z0-9]+$">
+              <input type="text" name="fname" class="form-control" id="firstName" placeholder="First name" required>
             </div>
             <div class="col">
               <label for="lastName" class="form-label">Last Name</label>
-              <input type="text" name="lname" class="form-control" id="lastName" placeholder="Last name" required pattern="^[A-Za-z0-9]+$">
+              <input type="text" name="lname" class="form-control" id="lastName" placeholder="Last name" required>
             </div>
           </div>
           <div class="mb-3">
@@ -138,6 +154,7 @@
   </div>
 </div>
 
+
 <!-- Hero Section -->
 <section class="hero-section">
   <div class="hero-overlay"></div>
@@ -147,47 +164,13 @@
       Experience compassionate, comprehensive healthcare designed around you. Connect with trusted professionals,
       manage your health records, and access care whenever you need it.
     </p>
-    <div class="container py-5">
-      <div class="row g-4">
-        <div class="col-md-6 col-lg-4">
-          <div class="custom-card">
-            <h5>Division 1</h5>
-            <p>This is content for the first division.</p>
-          </div>
-        </div>
 
-        <div class="col-md-6 col-lg-4">
-          <div class="custom-card">
-            <h5>Division 2</h5>
-            <p>This is content for the second division.</p>
-          </div>
-        </div>
-
-        <div class="col-md-6 col-lg-4">
-          <div class="custom-card">
-            <h5>Division 3</h5>
-            <p>This is content for the third division.</p>
-          </div>
-        </div>
-
-        <div class="col-md-6 col-lg-6">
-          <div class="custom-card">
-            <h5>Division 4</h5>
-            <p>This is content for the fourth division.</p>
-          </div>
-        </div>
-
-        <div class="col-md-6 col-lg-6">
-          <div class="custom-card">
-            <h5>Division 5</h5>
-            <p>This is content for the fifth division.</p>
-          </div>
-        </div>
-      </div>
-    </div>
   </div>
 </section>
-<!-- Bootstrap Bundle -->
+
+
+<!-- JS -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="js/script.js" ></script>
 </body>
 </html>

@@ -12,17 +12,92 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Patient Registration Form</title>
 
-  <!-- Bootstrap 5 -->
+
+  <!-- Bootstrap core CSS -->
+  <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
 
   <style>
-    body {
-      background: linear-gradient(135deg, #74ebd5, #ACB6E5);
-      min-height: 100vh;
+
+
+    .navbar {
+      background-color: #007bff;
       display: flex;
+      justify-content: space-between;
       align-items: center;
-      justify-content: center;
+      padding: 1rem 2rem;
+      border-bottom-left-radius: 20px;
+      border-bottom-right-radius: 20px;
     }
+
+    .navbar-brand {
+      color: #000;
+      font-weight: 700;
+      font-size: 1.5rem;
+    }
+
+    .navbar-brand span {
+      color: #dfe9f3;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 1.5rem;
+    }
+
+    .nav-links a {
+      color: white;
+      text-decoration: none;
+      padding: 0.4rem 1rem;
+      border-radius: 10px;
+      transition: background-color 0.3s;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+      background-color: rgba(255, 255, 255, 0.2);
+    }
+
+    @media (max-width: 768px) {
+      .nav-links {
+        flex-direction: column;
+        background-color: #007bff;
+        position: absolute;
+        top: 70px;
+        right: 0;
+        width: 200px;
+        display: none;
+        padding: 1rem;
+      }
+
+      .nav-links.show {
+        display: flex;
+      }
+
+      .menu-toggle {
+        display: block;
+        font-size: 1.5rem;
+        color: white;
+        cursor: pointer;
+      }
+    }
+
+    @media (min-width: 769px) {
+      .menu-toggle {
+        display: none;
+      }
+    }
+      .main-div
+      {
+        background: linear-gradient(135deg, #74ebd5, #ACB6E5);
+        min-height: 93vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
 
     .register-card {
       background: #ffffff;
@@ -78,19 +153,11 @@
 %>
 
 
-<!-- Navbar -->
-<nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm fixed-top">
-  <div class="container">
-    <a class="navbar-brand d-flex align-items-center fw-bold" href="#">
+<header class="navbar">
+  <div class="navbar-brand">WelCare.<span>Life</span></div>
 
-      WelCare.<span class="text-primary">Life</span>
-    </a>
-    <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navMenu">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-
-  </div>
-</nav>
+</header>
+<div class="main-div">
 <div class="register-card">
   <h2>Patient Registration</h2>
   <form action="DetailsChecker" method="post" id="registerForm">
@@ -150,7 +217,7 @@
     </div>
   </form>
 </div>
-
+</div>
 <!-- Bootstrap JS -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 

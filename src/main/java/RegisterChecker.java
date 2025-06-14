@@ -22,6 +22,7 @@ public class RegisterChecker extends HttpServlet
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
+
         String fname = req.getParameter("fname");
         String lname = req.getParameter("lname");
         String password = req.getParameter("password");
@@ -30,6 +31,8 @@ public class RegisterChecker extends HttpServlet
 
         if(!fname.isEmpty() && !lname.isEmpty() && !password.isEmpty() && !email.isEmpty() && !role.isEmpty())
         {
+            HttpSession session = req.getSession(true);
+
             if(role.equalsIgnoreCase("admin"))
             {
 
@@ -47,12 +50,13 @@ public class RegisterChecker extends HttpServlet
 
                 if(regis)
                 {
-                    HttpSession session = req.getSession(true);
                     session.setAttribute("fname", fname);
                     session.setAttribute("p_id", patient.getPid());
                     resp.sendRedirect("patientRegisterDetails.jsp");
                 }
-                else {
+                else
+                {
+                    session.setAttribute("regis", false);
                     resp.sendRedirect("index.jsp");
                 }
             }
@@ -70,18 +74,25 @@ public class RegisterChecker extends HttpServlet
 
                 if(regis)
                 {
-                    HttpSession session = req.getSession(true);
                     session.setAttribute("fname", fname);
                     session.setAttribute("d_id", doctor.getD_id());
                     resp.sendRedirect("doctorRegisterDetails.jsp");
                 }
-                else {
+                else
+                {
+                    session.setAttribute("regis", false);
                     resp.sendRedirect("index.jsp");
                 }
+            }
+            else
+            {
+                session.setAttribute("regis", false);
+                resp.sendRedirect("index.jsp");
             }
         }
         else
         {
+
             resp.sendRedirect("index.jsp");
         }
     }

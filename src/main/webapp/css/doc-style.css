@@ -1,0 +1,60 @@
+
+.info-box {
+    border: 1px solid #ffffff;
+    border-radius: 16px;
+    padding: 30px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.05);
+    height: 100%;
+    background-color: white;
+}
+
+.info-box h5 {
+    font-weight: bold;
+    margin-bottom: 20px;
+    position: relative;
+    display: inline-block;
+}
+
+.info-box h5::after {
+    content: '';
+    display: block;
+    width: 50px;
+    height: 2px;
+    background: #3498db;
+    margin-top: 10px;
+}
+
+.info-box table{
+    border-radius: 10px;
+}
+
+.emergency-btn {
+    background: linear-gradient(to right, #3498db, #1abc9c);
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 25px;
+    font-weight: bold;
+    display: inline-flex;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.emergency-btn i {
+    margin-right: 8px;
+}
+
+.appointment-btn {
+    background: linear-gradient(to right, #4a90e2, #38d4f3);
+    color: white;
+    font-weight: 600;
+    border-radius: 25px;
+    padding: 10px 30px;
+    border: none;
+}
+
+.form-control, .form-select {
+    background-color: #f1f5f9;
+    border-radius: 8px;
+    padding: 12px;
+}

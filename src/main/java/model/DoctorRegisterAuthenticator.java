@@ -61,7 +61,16 @@ public class DoctorRegisterAuthenticator
                 Session session = DbProvider.getSession();
                 Transaction tx = session.beginTransaction();
 
-                Query query = session.createQuery("update doctors d set d.phone = :phone,d.address =:address, d.dob =:dob,d.exprience =:experience,d.specialization =:spealization where d.d_id = :d_id ");
+                Query query = session.createQuery("update doctors d set d.phone = :phone,d.address =:address, d.dob =:dob,d.experience =:experience,d.specialization =:specialization, d.qualification =:qualification,d.city=:city,d.gender=:gender  where d.d_id = :d_id ");
+                query.setParameter("phone", doctor.getPhone());
+                query.setParameter("address", doctor.getAddress());
+                query.setParameter("dob", doctor.getDob());
+                query.setParameter("experience", doctor.getExperience());
+                query.setParameter("specialization", doctor.getSpecialization());
+                query.setParameter("qualification", doctor.getQualification());
+                query.setParameter("city", doctor.getCity());
+                query.setParameter("gender", doctor.getGender());
+                query.setParameter("d_id", doctor.getD_id());
 
                 i =  query.executeUpdate();
                 tx.commit();

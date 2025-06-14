@@ -23,19 +23,24 @@ public class DetailsChecker extends HttpServlet
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         String d_id = req.getParameter("d_id");
+        String p_id = req.getParameter("p_id");
+        String dob = req.getParameter("dob");
+        String gender = req.getParameter("gender");
+        String address = req.getParameter("address");
+        String bloodgroup = req.getParameter("bloodgroup");
+        String city = req.getParameter("city");
+        String phone = req.getParameter("phone");
+        String experience = req.getParameter("experience");
+        String specialization = req.getParameter("specialization");
+        String qualification = req.getParameter("qualification");
 
-        if(d_id==null || d_id=="")
+        HttpSession session = req.getSession(true);
+
+        if(d_id == null || d_id == "")
         {
 
-            String p_id = req.getParameter("p_id");
-            String dob = req.getParameter("dob");
-            String gender = req.getParameter("gender");
-            String address = req.getParameter("address");
-            String bloodgroup = req.getParameter("bloodgroup");
-            String city = req.getParameter("city");
-            String phone = req.getParameter("phone");
-
-            if (p_id != null && dob != null && gender != null && address != null && bloodgroup != null && city != null && phone != null) {
+            if (dob != null && gender != null && address != null && bloodgroup != null && city != null && phone != null)
+            {
                 Patient patient = new Patient();
                 patient.setPid(p_id);
                 patient.setDob(dob);
@@ -48,44 +53,42 @@ public class DetailsChecker extends HttpServlet
                 PatientRegisterAuthenticator auth = new PatientRegisterAuthenticator();
                 boolean details = auth.isDetails(patient);
                 if (details) {
-                    HttpSession session = req.getSession(true);
                     session.setAttribute("patient", patient);
-                    resp.sendRedirect("home.jsp");
+                    resp.sendRedirect(".jsp");
                 } else {
                     resp.sendRedirect("index.jsp");
                 }
             }
+            else
+            {
+                resp.sendRedirect("index.jsp");
+            }
         }
         else
         {
-            String dob = req.getParameter("dob");
-            String gender = req.getParameter("gender");
-            String address = req.getParameter("address");
-            String city = req.getParameter("city");
-            String phone = req.getParameter("phone");
-            String experience = req.getParameter("experience");
-            String specialization = req.getParameter("specialization");
-            String qualification = req.getParameter("qualification");
-
-            Doctor doctor = new Doctor();
-            doctor.setD_id(d_id);
-            doctor.setDob(dob);
-            doctor.setGender(gender);
-            doctor.setAddress(address);
-            doctor.setCity(city);
-            doctor.setPhone(phone);
-            doctor.setQualification(qualification);
-            doctor.setSpecialization(specialization);
-            doctor.setExprience(experience);
-
-            DoctorRegisterAuthenticator auth = new DoctorRegisterAuthenticator();
-            boolean details = auth.isDetails(doctor);
-
-            if (details)
+            if (gender != null && address != null && city != null && phone != null && experience != null && specialization != null && qualification != null)
             {
-                HttpSession session = req.getSession(true);
-                session.setAttribute("d_id", d_id);
-                resp.sendRedirect("home.jsp");
+                Doctor doctor = new Doctor();
+                doctor.setD_id(d_id);
+                doctor.setDob(dob);
+                doctor.setGender(gender);
+                doctor.setAddress(address);
+                doctor.setCity(city);
+                doctor.setPhone(phone);
+                doctor.setQualification(qualification);
+                doctor.setSpecialization(specialization);
+                doctor.setExperience(experience);
+
+                DoctorRegisterAuthenticator auth = new DoctorRegisterAuthenticator();
+                boolean details = auth.isDetails(doctor);
+
+                if (details) {
+                    session.setAttribute("doctor", doctor);
+                    resp.sendRedirect("docHome.jsp");
+                } else
+                {
+                    resp.sendRedirect("index.jsp");
+                }
             }
             else
             {
