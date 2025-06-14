@@ -17,7 +17,7 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet" />
 
-  <link href="css/style.css" rel="stylesheet">
+  <link href="css/style.css" rel="stylesheet"/>
 
   <title>WelCare.Life</title>
 </head>
@@ -44,7 +44,7 @@
           <a class="nav-link active" href="#home">Home</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#profile">Profile</a>
+          <a class="nav-link" data-bs-toggle="modal" data-bs-target="#signupModal" href="#signupModal">Profile</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="#about">About</a>
@@ -153,8 +153,6 @@
     </div>
   </div>
 </div>
-
-
 <!-- Hero Section -->
 <section class="hero-section">
   <div class="hero-overlay"></div>
@@ -164,10 +162,75 @@
       Experience compassionate, comprehensive healthcare designed around you. Connect with trusted professionals,
       manage your health records, and access care whenever you need it.
     </p>
-
   </div>
 </section>
 
+
+<!-- Subscribe Section -->
+<section id="contact" class="subscribe-section">
+  <div class="contact-form">
+    <h2>Contact Us</h2>
+    <form id="contactForm">
+      <div class="row mb-3">
+        <div class="col-md-6">
+          <label for="name" class="form-label">Full Name</label>
+          <input type="text" id="name" class="form-control" placeholder="Your name" required />
+        </div>
+        <div class="col-md-6">
+          <label for="email" class="form-label">Email Address</label>
+          <input type="email" id="email" class="form-control" placeholder="your@email.com" required />
+        </div>
+      </div>
+      <div class="row mb-3">
+        <div class="col-md-6">
+          <label for="phone" class="form-label">Phone Number</label>
+          <input type="tel" id="phone" class="form-control" placeholder="+91 9876543210" />
+        </div>
+        <div class="col-md-6">
+          <label for="subject" class="form-label">Subject</label>
+          <input type="text" id="subject" class="form-control" placeholder="Query, Feedback, Support..." />
+        </div>
+      </div>
+      <div class="mb-3">
+        <label for="message" class="form-label">Message</label>
+        <textarea id="message" class="form-control" rows="5" placeholder="Write your message here..." required></textarea>
+      </div>
+      <button type="submit" class="btn btn-primary px-4">Send Message</button>
+    </form>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer id="about">
+  <div class="container">
+    <div class="row footer-section">
+      <div class="col-md-4 mb-4">
+        <div class="footer-logo">💙 WelCare.<span class="text-primary">Life</span></div>
+        <p class="mt-3">
+          Experience compassionate, comprehensive healthcare tailored to you.
+          Manage your records, connect with professionals, and access care easily.
+        </p>
+      </div>
+      <div class="col-md-4 mb-4">
+        <h5>Contact</h5>
+        <p><strong>Address:</strong> Indore, India</p>
+        <p><strong>Phone:</strong> +91 98765 43210</p>
+        <p><strong>Email:</strong> welcare.life@gmail.com</p>
+      </div>
+      <div class="col-md-4 mb-4">
+        <h5>Useful Links</h5>
+        <ul class="list-unstyled">
+          <li><a href="#">Home</a></li>
+          <li><a href="#">About us</a></li>
+          <li><a href="#">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      ©2025 WelCare.Life. All rights reserved | Made with ❤️ by Team WelCare
+    </div>
+  </div>
+</footer>
 
 <!-- JS -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>

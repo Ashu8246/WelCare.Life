@@ -153,10 +153,17 @@
 %>
 
 
-<header class="navbar">
-  <div class="navbar-brand">WelCare.<span>Life</span></div>
+<!-- Navbar -->
+<nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm fixed-top">
+  <div class="container">
+    <!-- Logo + Brand -->
+    <a class="navbar-brand d-flex align-items-center" href="#">
 
-</header>
+      <span class="fw-bold text-dark">WelCare<span class="text-primary">.Life</span></span>
+    </a>
+
+  </div>
+</nav>
 <div class="main-div">
 <div class="register-card">
   <h2>Patient Registration</h2>
@@ -172,7 +179,7 @@
       </div>
       <div class="col-md-6">
         <label for="dob" class="form-label">Date of Birth</label>
-        <input type="date" name="age" class="form-control" id="dob" required>
+        <input type="date" name="dob" class="form-control" id="dob" required>
       </div>
       <div class="col-md-6">
         <label for="phone" class="form-label">Phone</label>
