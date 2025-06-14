@@ -41,7 +41,7 @@
       <!-- Nav links -->
       <ul class="navbar-nav me-auto mb-2 mb-md-0 ms-md-4">
         <li class="nav-item">
-          <a class="nav-link active" href="#home">Home</a>
+          <a class="nav-link active" href="index.jsp">Home</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" data-bs-toggle="modal" data-bs-target="#signupModal" href="#signupModal">Profile</a>

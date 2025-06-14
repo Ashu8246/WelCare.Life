@@ -83,7 +83,7 @@ public class DetailsChecker extends HttpServlet
                 boolean details = auth.isDetails(doctor);
 
                 if (details) {
-                    session.setAttribute("doctor", doctor);
+                    session.setAttribute("d_id", doctor.getD_id());
                     resp.sendRedirect("docHome.jsp");
                 } else
                 {

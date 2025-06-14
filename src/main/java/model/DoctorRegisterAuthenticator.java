@@ -75,6 +75,8 @@ public class DoctorRegisterAuthenticator
                 i =  query.executeUpdate();
                 tx.commit();
 
+
+
                 if(i>0)
                 {
                     return true;

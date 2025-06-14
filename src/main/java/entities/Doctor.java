@@ -158,4 +158,26 @@ public class Doctor
     public void setCity(String city) {
         this.city = city;
     }
+
+    @Override
+    public String toString() {
+        return "Doctor{" +
+                "d_id='" + d_id + '\'' +
+                ", fname='" + fname + '\'' +
+                ", lname='" + lname + '\'' +
+                ", address='" + address + '\'' +
+                ", city='" + city + '\'' +
+                ", email='" + email + '\'' +
+                ", phone='" + phone + '\'' +
+                ", password='" + password + '\'' +
+                ", gender='" + gender + '\'' +
+                ", dob='" + dob + '\'' +
+                ", specialization='" + specialization + '\'' +
+                ", qualification='" + qualification + '\'' +
+                ", status=" + status +
+                ", verified=" + verified +
+                ", experience='" + experience + '\'' +
+                ", role='" + role + '\'' +
+                '}';
+    }
 }
