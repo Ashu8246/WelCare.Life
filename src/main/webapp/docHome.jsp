@@ -79,7 +79,7 @@
 <!-- Hero Section -->
 <section class="hero-section">
 </section>
-<section>
+<section style="background: linear-gradient(white,#ACB6E5); border-radius: 30px;">
 <div class="container py-5">
     <div class="row g-4">
 
