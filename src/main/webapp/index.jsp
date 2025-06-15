@@ -76,8 +76,8 @@
       <div class="modal-body pt-0">
         <form action="LoginChecker" method="post">
           <div class="mb-3">
-            <label for="loginEmail" class="form-label">Email Address</label>
-            <input type="email" name="email" class="form-control" id="loginEmail" placeholder="your.email@example.com" required>
+            <label for="loginEmail" class="form-label">UserId</label>
+            <input type="text" name="u_id" class="form-control" id="loginEmail" placeholder="Doctor / Patient / Admin" required>
           </div>
           <div class="mb-3">
             <label for="loginPassword" class="form-label">Password</label>

@@ -27,12 +27,17 @@
 
 <%
     String d_id = (String) session.getAttribute("d_id");
+    if(d_id == null)
+    {
+        response.sendRedirect("index.jsp");
+    }
+    else {
     Doctor doctor = null;
     try {
-        if (d_id != null) {
-            Display display = new Display();
-            doctor = display.getDoctordetails(d_id);
-        }
+
+        Display display = new Display();
+        doctor = display.getDoctordetails(d_id);
+
     } catch (Exception e) {
         System.out.println(e);
     }
@@ -75,7 +80,7 @@
                         %><%=doctor.getD_id()%><%
                     }
                     else {
-                        %>User<%
+                        response.sendRedirect("index.jsp");
                     }
             %>
             </div>
@@ -131,13 +136,38 @@
         <!-- Emergency Info -->
         <div class="col-md-4">
             <div class="info-box">
-                <h5>Emergency</h5>
-                <button class="emergency-btn">
-                    <i class="bi bi-telephone-fill"></i> +34 586 778 8892
-                </button>
+                <h5>Availability Status </h5>
+                    <%
+                        if(doctor.getStatus() == 0)
+                        {
+                            %><h4 style="color: red">Not Available</h4><%
+                        }
+                        else
+                        {
+                            %><h4 style="color: #20c997">Available</h4><%
+                        }
+                %>
                 <p class="text-muted mt-3">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec malesuada lorem maximus.
+                    To update Availability status use toggle button.
                 </p>
+                <form action="UpdateToggleDoctorChecker" method="post">
+                    <input type="hidden" name="d_id" value="<%=doctor.getD_id()%>">
+                    <input type="hidden" name="type" value="availability">
+                <button class="emergency-btn" type="submit" style="margin-right: 20px;">
+
+                    <i class="bi"></i>
+                    <%
+                        if(doctor.getStatus() == 0)
+                        {
+                            %>Available<%
+                        }
+                        else {
+                            %>Not-Available<%
+                        }
+                    %>
+                </button >
+                </form>
+
             </div>
         </div>
 
@@ -247,7 +277,7 @@
         </div>
     </div>
 </footer>
-
+<% }%>
 <!-- Bootstrap + Icons -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet" />

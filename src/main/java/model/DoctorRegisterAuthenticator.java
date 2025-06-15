@@ -38,6 +38,11 @@ public class DoctorRegisterAuthenticator
                 Transaction tx = session.beginTransaction();
                 session.persist(doctor);
                 tx.commit();
+                if(tx.isActive())
+                {
+                    tx.rollback();
+                }
+
             }
             catch (Exception ex)
             {
