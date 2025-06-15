@@ -1,3 +1,4 @@
+import dto.PatientDto;
 import entities.Doctor;
 import entities.Patient;
 import model.DoctorRegisterAuthenticator;

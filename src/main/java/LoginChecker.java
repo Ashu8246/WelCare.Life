@@ -1,4 +1,7 @@
+import dto.DoctorDto;
+import dto.PatientDto;
 import entities.Doctor;
+import entities.Patient;
 import model.LoginAuthenticator;
 import org.apache.catalina.authenticator.NonLoginAuthenticator;
 
@@ -39,14 +42,32 @@ public class LoginChecker extends HttpServlet
         {
             if(u_id !=  null && password != null)
             {
+                PatientDto patient = new PatientDto();
+                patient.setPid(u_id);
+                patient.setPassword(password);
 
+                boolean login = auth.isPatient(patient);
+
+                if(login)
+                {
+                    session.setAttribute("pid", patient.getPid());
+                    resp.sendRedirect("patientHome.jsp");
+                }
+                else
+                {
+                    resp.sendRedirect("index.jsp");
+                }
+            }
+            else
+            {
+                resp.sendRedirect("index.jsp");
             }
         }
         else if(role.equalsIgnoreCase("doctor"))
         {
             if(u_id !=  null && password != null)
             {
-                Doctor doctor = new Doctor();
+                DoctorDto doctor = new DoctorDto();
                 doctor.setD_id(u_id);
                 doctor.setPassword(password);
 
@@ -56,6 +77,10 @@ public class LoginChecker extends HttpServlet
                 {
                     session.setAttribute("d_id", doctor.getD_id());
                     resp.sendRedirect("docHome.jsp");
+                }
+                else
+                {
+                    resp.sendRedirect("index.jsp");
                 }
             }
             else

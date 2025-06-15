@@ -171,7 +171,7 @@
     <div class="row g-3">
       <div class="col-md-6">
         <label for="patientId" class="form-label">Patient ID</label>
-        <input type="text" name="p_id" value="<%=p_id%>" class="form-control" id="patientId" >
+        <input type="text" name="p_id" value="<%=p_id%>" class="form-control" id="patientId" readonly>
       </div>
       <div class="col-md-6">
         <label for="firstName" class="form-label">First Name</label>
@@ -179,7 +179,7 @@
       </div>
       <div class="col-md-6">
         <label for="dob" class="form-label">Date of Birth</label>
-        <input type="date" name="dob" class="form-control" id="dob" required>
+        <input type="date" name="dob" class="form-control" id="dob" required maxlength="10">
       </div>
       <div class="col-md-6">
         <label for="phone" class="form-label">Phone</label>

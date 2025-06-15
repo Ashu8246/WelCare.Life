@@ -1,6 +1,7 @@
 package model;
 
 import db.DbProvider;
+import dto.PatientDto;
 import entities.Patient;
 import org.hibernate.Session;
 import org.hibernate.Transaction;

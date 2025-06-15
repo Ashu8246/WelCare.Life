@@ -2,6 +2,7 @@ package dao;
 
 import db.DbProvider;
 import entities.Doctor;
+import entities.Patient;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
@@ -20,5 +21,18 @@ public class Display
             tx.rollback();
         }
         return doctor;
+    }
+
+    public Patient getPatientdetails(String p_id)
+    {
+        Transaction tx = session.beginTransaction();
+        Patient patient  = session.get(Patient.class, p_id);
+        session.refresh(patient);
+        tx.commit();
+        if(tx.isActive())
+        {
+            tx.rollback();
+        }
+        return patient;
     }
 }

@@ -52,10 +52,13 @@ public class DetailsChecker extends HttpServlet
 
                 PatientRegisterAuthenticator auth = new PatientRegisterAuthenticator();
                 boolean details = auth.isDetails(patient);
-                if (details) {
-                    session.setAttribute("patient", patient);
+
+                if (details)
+                {
+                    session.setAttribute("pid", patient.getPid());
                     resp.sendRedirect("patientHome.jsp");
-                } else {
+                } else
+                {
                     resp.sendRedirect("index.jsp");
                 }
             }
