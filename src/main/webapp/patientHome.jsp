@@ -123,7 +123,7 @@
           <form class="mt-3">
             <div class="row g-2 mb-2">
               <div class="col">
-                <input type="text" name="reason"
+                <input type="text" name="reason">
               </div>
               <div class="col">
                 <select class="form-select" required>
@@ -157,30 +157,39 @@
 <section id="contact" class="subscribe-section">
   <div class="contact-form">
     <h2>Contact Us</h2>
-    <form id="contactForm">
+    <form id="contactForm" method="post" action="ContactUsChecker">
       <div class="row mb-3">
         <div class="col-md-6">
           <label for="name" class="form-label">Full Name</label>
-          <input type="text" id="name" class="form-control" placeholder="Your name" required />
+          <input type="text" name="name" id="name" class="form-control" placeholder="Your name" required />
         </div>
         <div class="col-md-6">
           <label for="email" class="form-label">Email Address</label>
-          <input type="email" id="email" class="form-control" placeholder="your@email.com" required />
+          <input type="email" name="email" id="email" class="form-control" placeholder="your@email.com" required />
         </div>
       </div>
       <div class="row mb-3">
         <div class="col-md-6">
           <label for="phone" class="form-label">Phone Number</label>
-          <input type="tel" id="phone" class="form-control" placeholder="+91 9876543210" />
+          <input type="tel" name="phone" id="phone" class="form-control" placeholder="+91985648723" maxlength="13"/>
         </div>
         <div class="col-md-6">
           <label for="subject" class="form-label">Subject</label>
-          <input type="text" id="subject" class="form-control" placeholder="Query, Feedback, Support..." />
+          <input type="text" id="subject" name="reason" class="form-control" placeholder="Query, Feedback, Support..." />
         </div>
       </div>
       <div class="mb-3">
+        <label for="loginEmail" class="form-label">Who are you ?</label>
+        <select class="form-control" name="role" id="role">
+          <option value="">Select Role</option>
+          <option value="Doctor">Doctor</option>
+          <option value="Patient">Patient</option>
+          <option value="Non-Registered User">Non-Registered User</option>
+        </select>
+      </div>
+      <div class="mb-3">
         <label for="message" class="form-label">Message</label>
-        <textarea id="message" class="form-control" rows="5" placeholder="Write your message here..." required></textarea>
+        <textarea id="message" name="message" class="form-control" rows="5" placeholder="Write your message here..." required></textarea>
       </div>
       <button type="submit" class="btn btn-primary px-4">Send Message</button>
     </form>
