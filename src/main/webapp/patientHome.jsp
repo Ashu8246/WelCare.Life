@@ -96,7 +96,7 @@
     <div class="row g-4">
 
       <!-- Emergency Info -->
-      <div class="col-md-4">
+      <div class="col-md-4" style="max-width: 200px; max-height: 150px;">
         <div class="info-box">
           <h5>Status </h5>
 
@@ -123,7 +123,7 @@
           <form class="mt-3">
             <div class="row g-2 mb-2">
               <div class="col">
-                <input type="text" name="reason">
+                <input type="text" class="form-control" name="reason" placeholder="Reason for Visit" required>
               </div>
               <div class="col">
                 <select class="form-select" required>
@@ -133,14 +133,60 @@
                 </select>
               </div>
             </div>
+
             <div class="row g-2 mb-2">
               <div class="col">
                 <input type="text" class="form-control" placeholder="Name" required>
               </div>
               <div class="col">
-                <input type="text" class="form-control" placeholder="Phone No" required>
+                <input type="number" class="form-control" placeholder="Age" required min="0.1" max="120" step="0.1">
+              </div>
+
+            </div>
+
+            <div class="row g-2 mb-2">
+              <div class="col">
+                <select class="form-select" required>
+                  <option value="">Select Blood Group</option>
+                  <option>A+</option>
+                  <option>A-</option>
+                  <option>B+</option>
+                  <option>B-</option>
+                  <option>O+</option>
+                  <option>O-</option>
+                  <option>AB+</option>
+                  <option>AB-</option>
+                </select>
+              </div>
+              <div class="col">
+                <input type="text" class="form-control" placeholder="City" required>
               </div>
             </div>
+
+            <div class="row g-2 mb-2">
+              <div class="col">
+                <input type="date" class="form-control" required>
+              </div>
+              <div class="col">
+                <select class="form-select" required>
+                  <option value="">Select Time Slot</option>
+                  <option>9:00 AM - 10:00 AM</option>
+                  <option>10:00 AM - 11:00 AM</option>
+                  <option>11:00 AM - 12:00 PM</option>
+                  <option>12:00 PM - 1:00 PM</option>
+                  <option>2:00 PM - 3:00 PM</option>
+                  <option>3:00 PM - 4:00 PM</option>
+                  <option>4:00 PM - 5:00 PM</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="row g-2 mb-2">
+              <div class="col">
+                <input type="tel" class="form-control" placeholder="Phone No" required pattern="[0-9]{10}">
+              </div>
+            </div>
+
             <div class="text-center mt-3">
               <button type="submit" class="appointment-btn">Book Appointment</button>
             </div>

@@ -150,11 +150,10 @@
                 <p class="text-muted mt-3">
                     To update Availability status use toggle button.
                 </p>
-                <form action="UpdateToggleDoctorChecker" method="post">
+                <form action="UpdateDoctorChecker" method="post">
                     <input type="hidden" name="d_id" value="<%=doctor.getD_id()%>">
                     <input type="hidden" name="type" value="availability">
                 <button class="emergency-btn" type="submit" style="margin-right: 20px;">
-
                     <i class="bi"></i>
                     <%
                         if(doctor.getStatus() == 0)

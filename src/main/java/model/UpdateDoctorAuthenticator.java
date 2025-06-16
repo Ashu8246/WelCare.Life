@@ -6,7 +6,7 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 
-public class UpdateToggleDoctorAuthenticator
+public class UpdateDoctorAuthenticator
 {
     Session session = DbProvider.getSession();
 

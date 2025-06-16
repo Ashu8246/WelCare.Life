@@ -1,6 +1,5 @@
 import entities.Doctor;
-import model.UpdateToggleDoctorAuthenticator;
-import org.hibernate.Session;
+import model.UpdateDoctorAuthenticator;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,8 +9,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
-@WebServlet(name = "UpdateToggleDoctorChecker", urlPatterns = "/UpdateToggleDoctorChecker")
-public class UpdateToggleDoctorChecker extends HttpServlet
+@WebServlet(name = "UpdateDoctorChecker", urlPatterns = "/UpdateDoctorChecker")
+public class UpdateDoctorChecker extends HttpServlet
 {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -24,7 +23,7 @@ public class UpdateToggleDoctorChecker extends HttpServlet
         String type = req.getParameter("type");
         String d_id = req.getParameter("d_id");
 
-        UpdateToggleDoctorAuthenticator auth  = new UpdateToggleDoctorAuthenticator();
+        UpdateDoctorAuthenticator auth  = new UpdateDoctorAuthenticator();
         HttpSession session = req.getSession(true);
         if(d_id != null && type != null)
         {
@@ -33,7 +32,7 @@ public class UpdateToggleDoctorChecker extends HttpServlet
                 doctor.setD_id(d_id);
                 boolean status = auth.isAvailability(doctor);
 
-                if (status)
+                if(status)
                 {
                     resp.sendRedirect("docHome.jsp");
                 }
