@@ -8,12 +8,12 @@ import org.hibernate.annotations.ColumnDefault;
 public class Appointment
 {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @ColumnDefault("754372")
     private int reason_id;
     private String pid;
     private String d_id;
-    private String name;
+    private String pname;
     private String reason;
     private String date;
     private String time;
@@ -44,12 +44,12 @@ public class Appointment
         this.d_id = d_id;
     }
 
-    public String getName() {
-        return name;
+    public String getPname() {
+        return pname;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setPname(String pname) {
+        this.pname = pname;
     }
 
     public String getReason() {
@@ -98,7 +98,7 @@ public class Appointment
                 "reason_id=" + reason_id +
                 ", pid='" + pid + '\'' +
                 ", d_id='" + d_id + '\'' +
-                ", name='" + name + '\'' +
+                ", name='" + pname + '\'' +
                 ", reason='" + reason + '\'' +
                 ", date='" + date + '\'' +
                 ", time='" + time + '\'' +

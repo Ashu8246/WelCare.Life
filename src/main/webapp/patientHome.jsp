@@ -3,7 +3,8 @@
 <%@ page import="java.util.List" %>
 <%@ page import="java.util.Iterator" %>
 <%@ page import="java.util.Objects" %>
-<%@ page import="dto.DoctorDto" %><%--
+<%@ page import="dto.DoctorDto" %>
+<%@ page import="entities.Doctor" %><%--
   Created by IntelliJ IDEA.
   User: ashug
   Date: 16-06-2025
@@ -28,7 +29,6 @@
 
 <%
   String pid = (String) session.getAttribute("pid");
-  List<DoctorDto> docDetails = (List<DoctorDto>) session.getAttribute("docDetails");
 
   Display display = new Display();
   if(pid == null)
@@ -37,11 +37,10 @@
   }
   else {
     Patient patient = null;
-    List<String> docSp = null;
+    List<Doctor> docDetails = null;
     try {
       patient = display.getPatientdetails(pid);
-      docSp = display.getDocSpecialization();
-
+      docDetails = display.getDocTable();
     } catch (Exception e) {
       System.out.println(e);
     }
@@ -102,9 +101,9 @@
 
   <div class="container py-5">
     <div class="row g-4">
-      <div class="info-box border-primary">
+      <div class="info-box border-primary"  >
         <h5>Doctors</h5>
-        <div class="table-responsive mt-3">
+        <div class="table-responsive mt-3" style="max-height: 40vh; overflow-y: auto;" >
           <table class="table bg-transparent mb-0 no-vertical-borders">
             <thead class="table-light">
             <tr>
@@ -113,34 +112,48 @@
               <th>Location</th>
               <th>Contact</th>
               <th>Availablity</th>
+              <th>Book Appointment</th>
             </tr>
             </thead>
-            <tbody>
+            <tbody  >
             <%
               if(docDetails != null)
               {
-                Iterator<DoctorDto> dd = docDetails.iterator();
-                  for (Iterator<DoctorDto> it = dd; it.hasNext(); ) {
-                      DoctorDto d = it.next();
-
-            %>
-            <tr>
-                <td><%=d.getD_id()%>
-                    </td>
-                  <tr>
-                      <%
-                          }
+                Iterator<Doctor> doc = docDetails.iterator();
+                while(doc.hasNext())
+                {
+                  Doctor d = doc.next();
+                  if(d != null)
+                  {
+                    %>
+                        <tr>
+                          <td><%=d.getFname()%></td>
+                          <td><%=d.getSpecialization()%></td>
+                          <td><%=d.getCity()%></td>
+                          <td><%=d.getPhone()%></td>
+                          <td><%if(d.getStatus() == 0)
+                                {
+                                    %><h6 style="color: red">Not Available</h6><%
+                                }
+                                else
+                                {
+                                    %><h6 style="color: #20c997">Available</h6><%
+                                }
+                              %>
+                          </td>
+                          <td>
+                            <form action="appointment.jsp" method="post">
+                                <input type="hidden" name="pid" value="<%=patient.getPid()%>">
+                              <input type="hidden" name="d_id" value="<%=d.getD_id()%>">
+                              <input type="hidden" name="pname" value="<%=patient.getFname()+" "+patient.getLname()%>">
+                                <button type="submit" class="appointment-btn">Book</button>
+                            </form>
+                          </td>
+                        </tr><%
+                  }
+                }
               }
-              else {
             %>
-
-              <td>John Doe</td>
-              <td>Fever</td>
-              <td>2025-06-14</td>
-              <td>32</td>
-              <td>O+</td>
-            </tr>
-            <%}%>
             <!-- Add more rows as needed -->
             </tbody>
           </table>
@@ -158,127 +171,11 @@
             <input type="hidden" name="d_id" value="">
             <input type="hidden" name="type" value="availability">
             <button class="emergency-btn" type="submit" style="margin-right: 20px;">
-
               <i class="bi"></i>
-
             </button >
           </form>
-
         </div>
       </div>
-
-      <!-- Make Appointment -->
-      <div class="col-md-4">
-        <div class="info-box">
-          <h5>Make an Appointment</h5>
-          <form class="mt-3">
-            <div class="row g-2 mb-2">
-              <div class="col">
-                <input type="text" class="form-control" name="reason" placeholder="Reason for Visit" required>
-              </div>
-              <div class="col">
-                <select class="form-select" required>
-                  <option value="">Select Doctor</option>
-                  <%
-                    String docSps = "";
-                    Iterator<String> iterator = docSp.iterator();
-                    if(docSp !=null)
-                    {
-                      while(iterator.hasNext())
-                      {
-                        docSps = iterator.next();
-                        %><option value="<%=docSps%>"><%=docSps%></option><%
-                      }
-                  }
-                    else {
-                  %><option value="nothing">nothing</option><%}%>
-
-                </select>
-<%--              </div>--%>
-<%--              <%--%>
-<%--                List<String> docFname = display.getDocName();--%>
-<%--                if(docFname != null) {--%>
-
-<%--                String fname = "";--%>
-<%--                Iterator<String> iterate = docFname.iterator();--%>
-<%--              %>--%>
-<%--              <div class="col">--%>
-<%--                <select class="form-select" required>--%>
-<%--                  <option value="">Select Doctor</option>--%>
-<%--                  <%--%>
-<%--                    while(iterate.hasNext())--%>
-<%--                    {--%>
-<%--                      fname = iterate.next();--%>
-<%--                      %><option value="<%=fname%>"><%=fname%></option><%--%>
-<%--                      }--%>
-
-
-<%--                  %>--%>
-<%--                </select>--%>
-<%--              </div>--%>
-<%--              <%}%>--%>
-            </div>
-
-            <div class="row g-2 mb-2">
-              <div class="col">
-                <input type="text" class="form-control" placeholder="Name" required>
-              </div>
-              <div class="col">
-                <input type="number" class="form-control" placeholder="Age" required min="0.1" max="120" step="0.1">
-              </div>
-
-            </div>
-
-            <div class="row g-2 mb-2">
-              <div class="col">
-                <select class="form-select" required>
-                  <option value="">Select Blood Group</option>
-                  <option>A+</option>
-                  <option>A-</option>
-                  <option>B+</option>
-                  <option>B-</option>
-                  <option>O+</option>
-                  <option>O-</option>
-                  <option>AB+</option>
-                  <option>AB-</option>
-                </select>
-              </div>
-              <div class="col">
-                <input type="text" class="form-control" placeholder="City" required>
-              </div>
-            </div>
-
-            <div class="row g-2 mb-2">
-              <div class="col">
-                <input type="date" class="form-control" required>
-              </div>
-              <div class="col">
-                <select class="form-select" required>
-                  <option value="">Select Time Slot</option>
-                  <option>9:00 AM - 10:00 AM</option>
-                  <option>10:00 AM - 11:00 AM</option>
-                  <option>11:00 AM - 12:00 PM</option>
-                  <option>12:00 PM - 1:00 PM</option>
-                  <option>2:00 PM - 3:00 PM</option>
-                  <option>3:00 PM - 4:00 PM</option>
-                  <option>4:00 PM - 5:00 PM</option>
-                </select>
-              </div>
-            </div>
-
-            <div class="row g-2 mb-2">
-              <div class="col">
-                <input type="tel" class="form-control" placeholder="Phone No" required pattern="[0-9]{10}">
-              </div>
-            </div>
-
-            <div class="text-center mt-3">
-              <button type="submit" class="appointment-btn">Book Appointment</button>
-            </div>
-          </form>
-        </div>
-      </div>
-
     </div>
   </div>
 </section>
@@ -362,7 +259,10 @@
 <!-- Bootstrap + Icons -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet" />
-<!-- Bootstrap Bundle -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+  setTimeout(function() {
+    location.reload();
+  }, 20000); // Refresh after 5 seconds
+</script>
 </body>
 </html>

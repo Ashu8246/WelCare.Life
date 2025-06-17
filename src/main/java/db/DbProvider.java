@@ -1,5 +1,6 @@
 package db;
 
+import entities.Appointment;
 import entities.ContactUs;
 import entities.Doctor;
 import entities.Patient;
@@ -24,6 +25,7 @@ public class DbProvider
                     .addAnnotatedClass(Patient.class)
                     .addAnnotatedClass(Doctor.class)
                     .addAnnotatedClass(ContactUs.class)
+                    .addAnnotatedClass(Appointment.class)
                     .buildSessionFactory();
 
             session = sf.openSession();

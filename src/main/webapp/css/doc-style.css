@@ -1,5 +1,6 @@
 
 .info-box {
+    min-width: 30vh;
     border: 1px solid #ffffff;
     border-radius: 16px;
     padding: 30px;

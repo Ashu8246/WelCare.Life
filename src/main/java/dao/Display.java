@@ -74,4 +74,23 @@ public class Display
         }
         return doc;
     }
+
+    public List<Doctor> getDocTable()
+    {
+        List<Doctor> doc = null;
+        try {
+            Transaction tx = session.beginTransaction();
+            Query query = session.createQuery("from doctors",Doctor.class);
+            doc = (List<Doctor>) query.list();
+            tx.commit();
+            if (tx.isActive()) {
+                tx.rollback();
+            }
+        }
+        catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        return doc;
+
+    }
 }
