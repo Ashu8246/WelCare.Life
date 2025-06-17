@@ -15,9 +15,6 @@ public class Appointment
     private String d_id;
     private String name;
     private String reason;
-    private String age;
-    private String bloodgroup;
-    private String city;
     private String date;
     private String time;
     private String phone;
@@ -63,30 +60,6 @@ public class Appointment
         this.reason = reason;
     }
 
-    public String getAge() {
-        return age;
-    }
-
-    public void setAge(String age) {
-        this.age = age;
-    }
-
-    public String getBloodgroup() {
-        return bloodgroup;
-    }
-
-    public void setBloodgroup(String bloodgroup) {
-        this.bloodgroup = bloodgroup;
-    }
-
-    public String getCity() {
-        return city;
-    }
-
-    public void setCity(String city) {
-        this.city = city;
-    }
-
     public String getDate() {
         return date;
     }
@@ -127,9 +100,6 @@ public class Appointment
                 ", d_id='" + d_id + '\'' +
                 ", name='" + name + '\'' +
                 ", reason='" + reason + '\'' +
-                ", age='" + age + '\'' +
-                ", bloodgroup='" + bloodgroup + '\'' +
-                ", city='" + city + '\'' +
                 ", date='" + date + '\'' +
                 ", time='" + time + '\'' +
                 ", phone='" + phone + '\'' +

@@ -1,5 +1,9 @@
 <%@ page import="entities.Patient" %>
-<%@ page import="dao.Display" %><%--
+<%@ page import="dao.Display" %>
+<%@ page import="java.util.List" %>
+<%@ page import="java.util.Iterator" %>
+<%@ page import="java.util.Objects" %>
+<%@ page import="dto.DoctorDto" %><%--
   Created by IntelliJ IDEA.
   User: ashug
   Date: 16-06-2025
@@ -24,16 +28,19 @@
 
 <%
   String pid = (String) session.getAttribute("pid");
+  List<DoctorDto> docDetails = (List<DoctorDto>) session.getAttribute("docDetails");
+
+  Display display = new Display();
   if(pid == null)
   {
     response.sendRedirect("index.jsp");
   }
   else {
     Patient patient = null;
+    List<String> docSp = null;
     try {
-
-      Display display = new Display();
       patient = display.getPatientdetails(pid);
+      docSp = display.getDocSpecialization();
 
     } catch (Exception e) {
       System.out.println(e);
@@ -92,9 +99,53 @@
 <section class="hero-section"></section>
 
 <section style="background: linear-gradient(white,#ACB6E5,#91a4ff); border-radius: 30px;">
+
   <div class="container py-5">
     <div class="row g-4">
+      <div class="info-box border-primary">
+        <h5>Doctors</h5>
+        <div class="table-responsive mt-3">
+          <table class="table bg-transparent mb-0 no-vertical-borders">
+            <thead class="table-light">
+            <tr>
+              <th>Name</th>
+              <th>Specialization</th>
+              <th>Location</th>
+              <th>Contact</th>
+              <th>Availablity</th>
+            </tr>
+            </thead>
+            <tbody>
+            <%
+              if(docDetails != null)
+              {
+                Iterator<DoctorDto> dd = docDetails.iterator();
+                  for (Iterator<DoctorDto> it = dd; it.hasNext(); ) {
+                      DoctorDto d = it.next();
 
+            %>
+            <tr>
+                <td><%=d.getD_id()%>
+                    </td>
+                  <tr>
+                      <%
+                          }
+              }
+              else {
+            %>
+
+              <td>John Doe</td>
+              <td>Fever</td>
+              <td>2025-06-14</td>
+              <td>32</td>
+              <td>O+</td>
+            </tr>
+            <%}%>
+            <!-- Add more rows as needed -->
+            </tbody>
+          </table>
+        </div>
+      </div>
       <!-- Emergency Info -->
       <div class="col-md-4" style="max-width: 200px; max-height: 150px;">
         <div class="info-box">
@@ -128,10 +179,44 @@
               <div class="col">
                 <select class="form-select" required>
                   <option value="">Select Doctor</option>
-                  <option>Dr. John</option>
-                  <option>Dr. Smith</option>
+                  <%
+                    String docSps = "";
+                    Iterator<String> iterator = docSp.iterator();
+                    if(docSp !=null)
+                    {
+                      while(iterator.hasNext())
+                      {
+                        docSps = iterator.next();
+                        %><option value="<%=docSps%>"><%=docSps%></option><%
+                      }
+                  }
+                    else {
+                  %><option value="nothing">nothing</option><%}%>
+
                 </select>
-              </div>
+<%--              </div>--%>
+<%--              <%--%>
+<%--                List<String> docFname = display.getDocName();--%>
+<%--                if(docFname != null) {--%>
+
+<%--                String fname = "";--%>
+<%--                Iterator<String> iterate = docFname.iterator();--%>
+<%--              %>--%>
+<%--              <div class="col">--%>
+<%--                <select class="form-select" required>--%>
+<%--                  <option value="">Select Doctor</option>--%>
+<%--                  <%--%>
+<%--                    while(iterate.hasNext())--%>
+<%--                    {--%>
+<%--                      fname = iterate.next();--%>
+<%--                      %><option value="<%=fname%>"><%=fname%></option><%--%>
+<%--                      }--%>
+
+
+<%--                  %>--%>
+<%--                </select>--%>
+<%--              </div>--%>
+<%--              <%}%>--%>
             </div>
 
             <div class="row g-2 mb-2">

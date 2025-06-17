@@ -5,6 +5,9 @@ import entities.Doctor;
 import entities.Patient;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.query.Query;
+
+import java.util.List;
 
 public class Display
 {
@@ -33,5 +36,42 @@ public class Display
             tx.rollback();
         }
         return patient;
+    }
+
+    public List<String> getDocSpecialization()
+    {
+        List<String> doc = null;
+        try {
+            Transaction tx = session.beginTransaction();
+            Query query = session.createQuery("select specialization from doctors");
+            doc = (List<String>) query.list();
+            tx.commit();
+            if (tx.isActive()) {
+                tx.rollback();
+            }
+        }
+        catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        return doc;
+    }
+
+    public List<String> getDocLocation()
+    {
+        List<String> doc = null;
+        try {
+            Transaction tx = session.beginTransaction();
+            Query query = session.createQuery("select city from doctors");
+            doc = (List<String>) query.list();
+            session.refresh(doc);
+            tx.commit();
+            if (tx.isActive()) {
+                tx.rollback();
+            }
+        }
+        catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        return doc;
     }
 }
