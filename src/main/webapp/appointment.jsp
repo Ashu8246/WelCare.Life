@@ -24,7 +24,8 @@
     String pid = request.getParameter("pid");
     String d_id = request.getParameter("d_id");
     String pname = request.getParameter("pname");
-    String referer = request.getHeader("referer");
+    String dname = request.getParameter("dname");
+    String phone  = request.getParameter("phone");
 
 %>
 <!-- Navbar -->
@@ -80,11 +81,18 @@
         <div class="info-box">
             <h5>Make an Appointment</h5>
             <form action="AppointmentChecker" method="post" class="mt-3">
+                <input type="hidden" name="pid" value="<%=pid%>">
+                <input type="hidden" name="d_id" value="<%=d_id%>">
                 <div class="row g-2 mb-2">
-                    <input type="hidden" name="pid" value="<%=pid%>">
-                    <input type="hidden" name="d_id" value="<%=d_id%>">
+                    <div class="row g-2 mb-2">
                     <div class="col">
                         <input type="text" class="form-control" name="reason" placeholder="Reason for Visit" required>
+                    </div>
+                    </div>
+                    <div class="row g-2 mb-2">
+                        <div class="col">
+                            <input type="text" name="dname" class="form-control" placeholder="Name" value="Dr. <%=dname%>" required readonly>
+                        </div>
                     </div>
                     <div class="row g-2 mb-2">
                         <div class="col">
@@ -111,7 +119,7 @@
 
                     <div class="row g-2 mb-2">
                         <div class="col">
-                            <input type="tel" name="phone" class="form-control" placeholder="Phone No" required pattern="[0-9]{10}" maxlength="10">
+                            <input type="tel" name="phone" class="form-control" value="<%=phone%>" placeholder="Phone No" required pattern="[0-9]{10}" maxlength="10">
                         </div>
                     </div>
 

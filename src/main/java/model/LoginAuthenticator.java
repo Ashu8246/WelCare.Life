@@ -38,6 +38,24 @@ public class LoginAuthenticator
 
     public boolean isAdmin(Admin admin)
     {
+        if(admin.getAdmin_id() != null  && admin.getPassword() != null)
+        {
+            try {
+                String admin_id = admin.getAdmin_id();
+                String password = admin.getPassword();
+
+                Session session = DbProvider.getSession();
+                Admin a = session.find(Admin.class, admin_id);
+                if (password.equals(a.getPassword()))
+                {
+                    return true;
+                }
+                return false;
+            }
+            catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
+        }
         return false;
     }
 
@@ -55,6 +73,7 @@ public class LoginAuthenticator
                 {
                     return true;
                 }
+                return false;
             }
             catch(Exception ex)
             {

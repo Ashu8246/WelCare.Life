@@ -14,6 +14,7 @@ public class Appointment
     private String pid;
     private String d_id;
     private String pname;
+    private String dname;
     private String reason;
     private String date;
     private String time;
@@ -90,6 +91,14 @@ public class Appointment
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public String getDname() {
+        return dname;
+    }
+
+    public void setDname(String dname) {
+        this.dname = dname;
     }
 
     @Override

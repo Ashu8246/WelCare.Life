@@ -1,6 +1,7 @@
 package dao;
 
 import db.DbProvider;
+import entities.Appointment;
 import entities.Doctor;
 import entities.Patient;
 import org.hibernate.Session;
@@ -38,54 +39,18 @@ public class Display
         return patient;
     }
 
-    public List<String> getDocSpecialization()
-    {
-        List<String> doc = null;
-        try {
-            Transaction tx = session.beginTransaction();
-            Query query = session.createQuery("select specialization from doctors");
-            doc = (List<String>) query.list();
-            tx.commit();
-            if (tx.isActive()) {
-                tx.rollback();
-            }
-        }
-        catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
-        return doc;
-    }
-
-    public List<String> getDocLocation()
-    {
-        List<String> doc = null;
-        try {
-            Transaction tx = session.beginTransaction();
-            Query query = session.createQuery("select city from doctors");
-            doc = (List<String>) query.list();
-            session.refresh(doc);
-            tx.commit();
-            if (tx.isActive()) {
-                tx.rollback();
-            }
-        }
-        catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
-        return doc;
-    }
-
     public List<Doctor> getDocTable()
     {
         List<Doctor> doc = null;
         try {
             Transaction tx = session.beginTransaction();
-            Query query = session.createQuery("from doctors",Doctor.class);
-            doc = (List<Doctor>) query.list();
+            Query<Doctor> query = session.createQuery("from doctors where verified = 'Verified'", Doctor.class);
+            doc = query.list();
             tx.commit();
             if (tx.isActive()) {
                 tx.rollback();
             }
+            return doc;
         }
         catch (Exception e) {
             System.out.println(e.getMessage());
@@ -93,4 +58,82 @@ public class Display
         return doc;
 
     }
+
+    public List<Doctor> getDocTableForAdmin()
+    {
+        List<Doctor> doc = null;
+        try {
+            Transaction tx = session.beginTransaction();
+            Query<Doctor> query = session.createQuery("from doctors", Doctor.class);
+            doc = query.list();
+            tx.commit();
+            if (tx.isActive()) {
+                tx.rollback();
+            }
+            return doc;
+        }
+        catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        return doc;
+
+    }
+
+    public List<Appointment> getAppointmentDetails(String d_id)
+    {
+        List<Appointment> appoint = null;
+        try {
+            Transaction tx = session.beginTransaction();
+            Query query = session.createQuery("from appointments where d_id=:d_id",Appointment.class);
+            query.setParameter("d_id",d_id);
+            appoint = query.list();
+            tx.commit();
+            if (tx.isActive()) {
+                tx.rollback();
+            }
+            return appoint;
+        }
+        catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        return appoint;
+    }
+
+    public List<Appointment> getAppointmentDetailsPid(String pid)
+    {
+        List<Appointment> appoint = null;
+        try {
+            Transaction tx = session.beginTransaction();
+            appoint = session.createQuery("from appointments where pid='"+pid+"'",Appointment.class).list();;
+            tx.commit();
+            if (tx.isActive()) {
+                tx.rollback();
+            }
+            return appoint;
+        }
+        catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        return appoint;
+    }
+
+//    public List<Appointment> getAppointmentDetails(String d_id)
+//    {
+//        List<Appointment> appoint = null;
+//        try {
+//            Transaction tx = session.beginTransaction();
+//            Query query = session.createQuery("from appointments where d_id=:d_id",Appointment.class);
+//            query.setParameter("d_id",d_id);
+//            appoint = (List<Appointment>) query.list();
+//            tx.commit();
+//            if (tx.isActive()) {
+//                tx.rollback();
+//            }
+//        }
+//        catch (Exception e) {
+//            System.out.println(e.getMessage());
+//        }
+//        return appoint;
+//
+//    }
 }

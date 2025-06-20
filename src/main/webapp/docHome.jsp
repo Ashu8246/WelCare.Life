@@ -1,7 +1,10 @@
 <%@ page import="entities.Patient" %>
 <%@ page import="javax.print.Doc" %>
 <%@ page import="entities.Doctor" %>
-<%@ page import="dao.Display" %><%--
+<%@ page import="dao.Display" %>
+<%@ page import="entities.Appointment" %>
+<%@ page import="java.util.List" %>
+<%@ page import="java.util.Iterator" %><%--
   Created by IntelliJ IDEA.
   User: ashug
   Date: 12-06-2025
@@ -33,11 +36,12 @@
     }
     else {
     Doctor doctor = null;
+    List<Appointment> appoint = null;
     try {
 
         Display display = new Display();
         doctor = display.getDoctordetails(d_id);
-
+        appoint = display.getAppointmentDetails(d_id);
     } catch (Exception e) {
         System.out.println(e);
     }
@@ -96,40 +100,68 @@
 
 </section>
 
-<section style="background: linear-gradient(white,#ACB6E5,#91a4ff); border-radius: 30px;">
+<section style="background: linear-gradient(white,#ACB6E5,#91a4ff);">
 <div class="container py-5">
     <div class="row g-4">
-
-        <!-- Opening Hours -->
-        <div class="info-box border-primary">
-            <h5>Appointments</h5>
-            <div class="table-responsive mt-3">
-                <table class="table bg-transparent mb-0 no-vertical-borders">
-                    <thead class="table-light">
-                    <tr>
-                        <th>Name</th>
-                        <th>Reason</th>
-                        <th>Date</th>
-                        <th>Age</th>
-                        <th>Blood Group</th>
-                        <th>City</th>
-                        <th>Phone No</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                        <td>John Doe</td>
-                        <td>Fever</td>
-                        <td>2025-06-14</td>
-                        <td>32</td>
-                        <td>O+</td>
-                        <td>Delhi</td>
-                        <td>9876543210</td>
-                    </tr>
-
-                    <!-- Add more rows as needed -->
-                    </tbody>
-                </table>
+        <div class="container py-5">
+            <div class="row g-4">
+                <div class="info-box border-primary" >
+                    <h5>Upcoming Appointments</h5>
+                    <div class="table-responsive mt-3" style="max-height: 40vh; overflow-y: auto;" >
+                        <table class="table bg-transparent mb-0 no-vertical-borders" >
+                            <thead class="table-light">
+                            <tr>
+                                <th>Reason</th>
+                                <th>Patient Name</th>
+                                <th>Contact</th>
+                                <th>Date</th>
+                                <th>Time</th>
+                                <th>Status</th>
+                                <th>Change Status</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <%
+                                if(appoint != null)
+                                {
+                                    Iterator<Appointment> appointmentIterator = appoint.iterator();
+                                    while(appointmentIterator.hasNext())
+                                    {
+                                        Appointment app = appointmentIterator.next();
+                                        if(app != null)
+                                        {
+                            %>
+                            <tr>
+                                <td><%=app.getReason()%></td>
+                                <td><%=app.getPname()%></td>
+                                <td><%=app.getPhone()%></td>
+                                <td><%=app.getDate()%></td>
+                                <td><%=app.getTime()%></td>
+                                <td><%=app.getStatus()%></td>
+                                </td>
+                               <td>
+                                       <form id="statusForm" action="AppointmentChecker" method="POST">
+                                           <input type="hidden" name="reason_id" value="<%=app.getReason_id()%>">
+                                           <input type="hidden" name="d_id" value="<%=d_id%>">
+                                           <select class="form-select"  onchange="autoSubmit()" style="max-height: 35px; padding: 2px; padding-left: 3px;" name="status" id="statusSelect" required>
+                                               <option value="" disabled selected>Choose status</option>
+                                               <option value="Accept">Accept</option>
+                                               <option value="Declined">Declined</option>
+                                               <option value="Visited">Visited</option>
+                                               <option value="Not-Visited">Not-Visited</option>
+                                           </select>
+                                       </form>
+                                   <td>
+                            </tr><%
+                                        }
+                                    }
+                                }
+                            %>
+                            <!-- Add more rows as needed -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -293,6 +325,10 @@
     setTimeout(function() {
         location.reload();
     }, 20000); // Refresh after 5 seconds
+
+    function autoSubmit() {
+        document.getElementById("statusForm").submit();
+    }
 </script>
 </body>
 </html>

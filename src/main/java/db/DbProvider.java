@@ -1,9 +1,6 @@
 package db;
 
-import entities.Appointment;
-import entities.ContactUs;
-import entities.Doctor;
-import entities.Patient;
+import entities.*;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
@@ -26,6 +23,7 @@ public class DbProvider
                     .addAnnotatedClass(Doctor.class)
                     .addAnnotatedClass(ContactUs.class)
                     .addAnnotatedClass(Appointment.class)
+                    .addAnnotatedClass(Admin.class)
                     .buildSessionFactory();
 
             session = sf.openSession();

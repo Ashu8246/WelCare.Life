@@ -1,9 +1,7 @@
 import dto.DoctorDto;
 import dto.PatientDto;
-import entities.Doctor;
-import entities.Patient;
+import entities.Admin;
 import model.LoginAuthenticator;
-import org.apache.catalina.authenticator.NonLoginAuthenticator;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -35,7 +33,24 @@ public class LoginChecker extends HttpServlet
         {
             if(u_id !=  null && password != null)
             {
+                Admin admin = new Admin();
+                admin.setAdmin_id(u_id);
+                admin.setPassword(password);
 
+                boolean login = auth.isAdmin(admin);
+                if(login)
+                {
+                    session.setAttribute("admin_id", u_id);
+                    resp.sendRedirect("adminHome.jsp");
+                }
+                else
+                {
+                    resp.sendRedirect("index.jsp");
+                }
+            }
+            else
+            {
+                resp.sendRedirect("index.jsp");
             }
         }
         else if(role.equalsIgnoreCase("patient"))

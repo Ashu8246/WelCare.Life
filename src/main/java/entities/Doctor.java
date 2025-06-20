@@ -24,7 +24,7 @@ public class Doctor
     String specialization;
     String qualification;
     int status;
-    int verified;
+    String verified = "Pending";
     String experience;
     String role;
 
@@ -140,20 +140,20 @@ public class Doctor
         this.status = status;
     }
 
-    public int getVerified() {
-        return verified;
-    }
-
-    public void setVerified(int verified) {
-        this.verified = verified;
-    }
-
     public String getCity() {
         return city;
     }
 
     public void setCity(String city) {
         this.city = city;
+    }
+
+    public String getVerified() {
+        return verified;
+    }
+
+    public void setVerified(String verified) {
+        this.verified = verified;
     }
 
     @Override

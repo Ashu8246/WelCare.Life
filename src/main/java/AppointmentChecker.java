@@ -24,15 +24,19 @@ public class AppointmentChecker extends HttpServlet
         String pid = req.getParameter("pid");
         String pname = req.getParameter("pname");
         String d_id = req.getParameter("d_id");
+        String dname = req.getParameter("dname");
         String date =  req.getParameter("date");
         String time =  req.getParameter("time");
         String reason = req.getParameter("reason");
         String phone = req.getParameter("phone");
+        String status = req.getParameter("status");
+        String reason_id = req.getParameter("reason_id");
 
+        Appointment appointment = new Appointment();
+        AppointmentAuthenticator auth =  new AppointmentAuthenticator();
 
         if(pid != null && pname != null && date != null && time != null && reason != null && d_id != null)
         {
-            Appointment appointment = new Appointment();
             appointment.setPid(pid);
             appointment.setPname(pname);
             appointment.setD_id(d_id);
@@ -40,13 +44,31 @@ public class AppointmentChecker extends HttpServlet
             appointment.setTime(time);
             appointment.setReason(reason);
             appointment.setPhone(phone);
+            appointment.setDname(dname);
 
-            AppointmentAuthenticator auth =  new AppointmentAuthenticator();
             boolean appoint = auth.isAppoint(appointment);
 
             if(appoint)
             {
                 resp.sendRedirect("patientHome.jsp");
+            }
+            else
+            {
+                resp.sendRedirect("appointment.jsp");
+            }
+        }
+        else if (status != null && status != "" && reason_id != null && reason_id != "")
+        {
+            //Set details to appointment entity
+            appointment.setReason_id(Integer.parseInt(reason_id));
+            appointment.setStatus(status);
+
+            //Appointment Authenticator
+            boolean appoint = auth.isStatus(appointment);
+
+            if(appoint)
+            {
+                resp.sendRedirect("docHome.jsp");
             }
             else
             {
