@@ -1,9 +1,10 @@
+<%@ page import="entities.Doctor" %>
 <%@ page import="dao.Display" %>
-<%@ page import="entities.Doctor" %><%--
+<%--
   Created by IntelliJ IDEA.
   User: ashug
-  Date: 19-06-2025
-  Time: 06:53 am
+  Date: 21-06-2025
+  Time: 03:09 am
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -24,14 +25,12 @@
 </head>
 <body class="bg-light">
 <%
-  String admin_id = request.getParameter("admin_id");
   String d_id = request.getParameter("d_id");
-  String referer = request.getHeader("Referer");
   Display display = new Display();
   Doctor doc = null;
-  if(admin_id == null)
+  if(d_id == null)
   {
-    response.sendRedirect(referer);
+    response.sendRedirect("docHome.jsp");
   }
   else {
     try
@@ -64,7 +63,7 @@
           <a class="nav-link active" href="index.jsp">Home</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Profile</a>
+          <a class="nav-link" href="#" onclick="submitProfileForm()">Profile</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="#about">About</a>
@@ -74,15 +73,7 @@
         </li>
       </ul>
       <div style="margin: 10px;" class="d-flex gap-2">
-        <%
-          if(admin_id != null)
-          {
-        %><%=admin_id%><%
-        }
-        else {
-          response.sendRedirect(referer);
-        }
-      %>
+          <%=d_id%>
       </div>
       <div class="d-flex gap-2">
         <a href="signOut.jsp"><button class="btn btn-primary" >Sign out</button></a>
@@ -91,29 +82,28 @@
   </div>
 </nav>
 <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="signupModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content border-0 shadow rounded-4 p-3">
-      <div class="modal-header border-0 pb-0">
-        <h5 class="modal-title fw-bold" id="signupModalLabel">Delete Doctor Profile</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body pt-0">
-        <form action="DeleteChecker" method="post">
-          <input type="hidden" name="admin_id" value="<%=admin_id%>">
-          <input type="hidden" name="d_id" value="<%=doc.getD_id()%>">
-          <input type="hidden" name="_for" value="adminDeleteDoc">
-          <div class="row g-3 mb-3">
-            <div class="mb-3">
-              <label for="signupPassword" class="form-label">Password</label>
-              <input type="password" name="password" class="form-control" id="signupPassword" placeholder="Enter admin password to Delete Doctor Profile" required>
-            </div>
-            <div class="d-grid mt-4">
-              <button type="submit" class="btn btn-primary fw-semibold">Delete</button>
-            </div>
-        </form>
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content border-0 shadow rounded-4 p-3">
+        <div class="modal-header border-0 pb-0">
+          <h5 class="modal-title fw-bold" id="signupModalLabel">Delete Doctor Profile</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body pt-0">
+          <form action="DeleteChecker" method="post">
+            <input type="hidden" name="d_id" value="<%=d_id%>">
+            <input type="hidden" name="_for" value="Doctor">
+            <div class="row g-3 mb-3">
+              <div class="mb-3">
+                <label for="signupPassword" class="form-label">Password</label>
+                <input type="password" name="password" class="form-control" id="signupPassword" placeholder="Enter your password to Delete Profile" required>
+              </div>
+              <div class="d-grid mt-4">
+                <button type="submit" class="btn btn-primary fw-semibold">Delete</button>
+              </div>
+          </form>
+        </div>
       </div>
     </div>
-  </div>
   </div>
 </div>
 <div class="modal fade" id="verifyModal" tabindex="-1" aria-labelledby="signupModalLabel" aria-hidden="true">
@@ -134,30 +124,30 @@
               <option value="Declined">Decline</option>
             </select>
           </div>
-            <div class="d-grid mt-4">
-              <button type="submit" class="btn btn-primary fw-semibold">Change</button>
-            </div>
+          <div class="d-grid mt-4">
+            <button type="submit" class="btn btn-primary fw-semibold">Change</button>
+          </div>
         </form>
       </div>
     </div>
   </div>
 </div>
 </div>
-<section style="background: linear-gradient(white,#ACB6E5,#91a4ff);margin-top: 5vh; padding: 5vh;">
+<section style="background: linear-gradient(#91a4ff,#ACB6E5,#f6f7f8);margin-top: 5vh; padding: 5vh;">
 
   <div class="profile-container">
     <!-- Left Section -->
     <div class="profile-left">
       <img class="profile-image" src="images/img.png" alt="Doctor Profile" />
-      <h4>Dr. ExampleABC</h4><%
+      <h4>Dr. <%=doc.getFname()+" "+doc.getLname()%></h4><%
       if(doc.getVerified().equalsIgnoreCase("verified"))
       {
-      %><div style="color: #198754;font-size: 14px; margin-top: 10px;">Verified Doctor</div><%
+    %><div style="color: #198754;font-size: 14px; margin-top: 10px;">Verified Doctor</div><%
+    }
+    else {
+    %><div style="color: #871919;font-size: 14px; margin-top: 10px;">Not-Verified Doctor</div><%
       }
-      else {
-      %><div style="color: #871919;font-size: 14px; margin-top: 10px;">Not-Verified Doctor</div><%
-      }
-      %>
+    %>
       <p style="padding :2vh;">Experience compassionate, comprehensive healthcare designed around you. Connect with trusted professionals, manage your health records, and access care whenever you need it.</p>
     </div>
 
@@ -172,7 +162,7 @@
 
       <div class="info-row">
         <div class="info-label">Qualification</div>
-      <div class="info-value"><%=doc.getQualification()%></div>
+        <div class="info-value"><%=doc.getQualification()%></div>
       </div>
 
       <div class="info-row">
@@ -207,8 +197,8 @@
         <div class="info-value fw-semibold"><%=doc.getVerified()%></div>
       </div>
       <div class="d-flex justify-content-center gap-3 flex-wrap mt-3 mb-3">
-        <button type="button" data-bs-toggle="modal" data-bs-target="#verifyModal" class="appointment-btn">
-          Verify Profile
+        <button type="button" data-bs-toggle="modal" data-bs-target="#updateModal" class="appointment-btn">
+          Update Profile
         </button>
 
         <button type="button" data-bs-toggle="modal" data-bs-target="#deleteModal" class="appointment-btn">

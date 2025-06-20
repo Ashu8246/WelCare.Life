@@ -1,5 +1,3 @@
-<%@ page import="entities.Patient" %>
-<%@ page import="javax.print.Doc" %>
 <%@ page import="entities.Doctor" %>
 <%@ page import="dao.Display" %>
 <%@ page import="entities.Appointment" %>
@@ -68,7 +66,7 @@
                     <a class="nav-link active" href="index.jsp">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Profile</a>
+                    <a class="nav-link" href="#" onclick="submitProfileForm()">Profile</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#about">About</a>
@@ -94,6 +92,11 @@
         </div>
     </div>
 </nav>
+
+<!-- Hidden data -->
+<form id="profileForm" action="doctorProfile.jsp" method="post" style="display: none;">
+    <input type="hidden" name="d_id" value="<%=d_id%>">
+</form>
 
 <!-- Hero Section -->
 <section class="hero-section">
@@ -324,10 +327,10 @@
 <script>
     setTimeout(function() {
         location.reload();
-    }, 20000); // Refresh after 5 seconds
+    }, 20000); // Refresh after 20 seconds
 
-    function autoSubmit() {
-        document.getElementById("statusForm").submit();
+    function submitProfileForm() {
+        document.getElementById('profileForm').submit();
     }
 </script>
 </body>
