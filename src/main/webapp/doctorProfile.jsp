@@ -106,7 +106,7 @@
     </div>
   </div>
 </div>
-<div class="modal fade" id="verifyModal" tabindex="-1" aria-labelledby="signupModalLabel" aria-hidden="true">
+<div class="modal fade" id="updateModal" tabindex="-1" aria-labelledby="signupModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content border-0 shadow rounded-4 p-3">
       <div class="modal-header border-0 pb-0">
@@ -114,18 +114,45 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body pt-0 mt-1">
-        <form action="VerificationChecker" method="post">
-          <input type="hidden" name="d_id" value="<%=d_id%>">
+        <form action="" method="post">
           <div class="mb-3">
-            <label for="loginEmail" class="form-label">Change Verification type</label>
-            <select class="form-control" name="verification" id="role">
-              <option>Choose status</option>
-              <option value="Verified">Verify</option>
-              <option value="Declined">Decline</option>
-            </select>
+            <label for="signupEmail" class="form-label">Qualification</label>
+            <input type="email" name="d_id" class="form-control" id="signupEmail" placeholder="" value="<%=d_id%>" required readonly>
+          </div>
+          <div class="row g-3 mb-3">
+            <div class="col">
+              <label for="firstName" class="form-label">First Name</label>
+              <input type="text" name="fname" class="form-control" id="firstName" value="<%=doc.getFname()%>" placeholder="First name" required>
+            </div>
+            <div class="col">
+              <label for="lastName" class="form-label">Last Name</label>
+              <input type="text" name="lname" class="form-control" id="lastName" value="<%=doc.getLname()%>" placeholder="Last name" required>
+            </div>
+          </div>
+          <div class="mb-3">
+            <label for="signupEmail" class="form-label">Qualification</label>
+            <input type="email" name="qualification" class="form-control" id="signupEmail" value="<%=doc.getQualification()%>" placeholder="MBBS, MD, PHD" required>
+          </div>
+          <div class="mb-3">
+            <label for="signupEmail" class="form-label">Specialization</label>
+            <input type="email" name="qualification" class="form-control" id="signupEmail" value="<%=doc.getSpecialization()%>" placeholder="Cardiologist / Dermetologist" required>
+          </div>
+          <div class="row g-3 mb-3">
+            <div class="col">
+              <label for="firstName" class="form-label">City</label>
+              <input type="text" name="city" class="form-control" id="firstName" value="<%=doc.getCity()%>" placeholder="First name" required>
+            </div>
+            <div class="col">
+              <label for="lastName" class="form-label">Last Name</label>
+              <input type="text" name="address" class="form-control" id="lastName" value="<%=doc.getAddress()%>" placeholder="Last name" required>
+            </div>
+          </div>
+          <div class="mb-3">
+            <label for="signupPassword" class="form-label">Password</label>
+            <input type="password" name="password" class="form-control" id="signupPassword"  placeholder="Enter password to update details" required>
           </div>
           <div class="d-grid mt-4">
-            <button type="submit" class="btn btn-primary fw-semibold">Change</button>
+            <button type="submit" class="btn btn-primary fw-semibold">Update</button>
           </div>
         </form>
       </div>
