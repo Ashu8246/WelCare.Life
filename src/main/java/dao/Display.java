@@ -117,23 +117,22 @@ public class Display
         return appoint;
     }
 
-//    public List<Appointment> getAppointmentDetails(String d_id)
-//    {
-//        List<Appointment> appoint = null;
-//        try {
-//            Transaction tx = session.beginTransaction();
-//            Query query = session.createQuery("from appointments where d_id=:d_id",Appointment.class);
-//            query.setParameter("d_id",d_id);
-//            appoint = (List<Appointment>) query.list();
-//            tx.commit();
-//            if (tx.isActive()) {
-//                tx.rollback();
-//            }
-//        }
-//        catch (Exception e) {
-//            System.out.println(e.getMessage());
-//        }
-//        return appoint;
-//
-//    }
+    public Appointment getAppointmentDetailsReason_id(String reason_id)
+    {
+        Appointment appoint = null;
+        try {
+            Transaction tx = session.beginTransaction();
+            appoint = session.get(Appointment.class, reason_id);
+            tx.commit();
+            if (tx.isActive()) {
+                tx.rollback();
+            }
+            return appoint;
+        }
+        catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        return appoint;
+
+    }
 }

@@ -64,7 +64,7 @@ public class UpdateDoctorChecker extends HttpServlet
                     boolean update = auth.isUpdateDetails(doctor);
 
                     if (update) {
-                        resp.sendRedirect("docHome.jsp");
+                        resp.sendRedirect("doctorProfile.jsp");
                     } else {
                         resp.sendRedirect("docHome.jsp");
                     }

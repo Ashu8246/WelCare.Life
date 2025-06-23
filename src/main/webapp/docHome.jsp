@@ -63,7 +63,7 @@
             <!-- Nav links -->
             <ul class="navbar-nav me-auto mb-2 mb-md-0 ms-md-4">
                 <li class="nav-item">
-                    <a class="nav-link active" href="index.jsp">Home</a>
+                    <a class="nav-link active" href="docHome.jsp">Home</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#" onclick="submitProfileForm()">Profile</a>
@@ -106,55 +106,62 @@
 <section style="background: linear-gradient(white,#ACB6E5,#91a4ff);">
 <div class="container py-5">
     <div class="row g-4">
-        <div class="container py-5">
+        <div class="container py-5" style=" max-width: 80vh;">
             <div class="row g-4">
-                <div class="info-box border-primary" >
-                    <h5>Upcoming Appointments</h5>
+                <div class="info-box border-primary"  >
+                    <h5>Appointments</h5>
                     <div class="table-responsive mt-3" style="max-height: 40vh; overflow-y: auto;" >
-                        <table class="table bg-transparent mb-0 no-vertical-borders" >
+                        <table class="table bg-transparent mb-0 no-vertical-borders">
                             <thead class="table-light">
                             <tr>
-                                <th>Reason</th>
                                 <th>Patient Name</th>
-                                <th>Contact</th>
-                                <th>Date</th>
-                                <th>Time</th>
+                                <th>Reason</th>
                                 <th>Status</th>
-                                <th>Change Status</th>
+                                <th></th>
                             </tr>
                             </thead>
-                            <tbody>
+                            <tbody  >
                             <%
                                 if(appoint != null)
                                 {
-                                    Iterator<Appointment> appointmentIterator = appoint.iterator();
-                                    while(appointmentIterator.hasNext())
+                                    Iterator<Appointment> app = appoint.iterator();
+                                    while(app.hasNext())
                                     {
-                                        Appointment app = appointmentIterator.next();
-                                        if(app != null)
+                                        Appointment a = app.next();
+                                        if(a != null)
                                         {
                             %>
                             <tr>
-                                <td><%=app.getReason()%></td>
-                                <td><%=app.getPname()%></td>
-                                <td><%=app.getPhone()%></td>
-                                <td><%=app.getDate()%></td>
-                                <td><%=app.getTime()%></td>
-                                <td><%=app.getStatus()%></td>
+                                <td><%=a.getPname()%></td>
+                                <td><%=a.getDate()%></td>
+                                <td><%if(a.getStatus().equalsIgnoreCase("Accepted"))
+                            {
+                            %><h6 style="color: #20c997">Accepted</h6><%
+                            }
+                            else if (a.getStatus().equalsIgnoreCase("Rejected"))
+                            {
+                            %><h6 style="color: red">Rejected</h6><%
+                            }
+                            else if (a.getStatus().equalsIgnoreCase("Visited"))
+                            {
+                                %><h6 style="color: #20c997">Visited</h6><%
+                            }
+                            else if (a.getStatus().equalsIgnoreCase("Not-Visited"))
+                            {
+                                %><h6 style="color: red">Not-Visited</h6><%
+                            }
+                            else
+                            {
+                            %><h6 style="color: orange">Pending</h6><%
+                                }
+                            %>
+                            </td>
+                                <td>
+                                    <form id="statusForm" action="appointmentDetails.jsp" method="post">
+                                        <input type="hidden" name="reason_id" value="<%=a.getReason_id()%>" readonly>
+                                        <button type="submit" class="appointment-btn">See Details</button>
+                                    </form>
                                 </td>
-                               <td>
-                                       <form id="statusForm" action="AppointmentChecker" method="POST">
-                                           <input type="hidden" name="reason_id" value="<%=app.getReason_id()%>">
-                                           <input type="hidden" name="d_id" value="<%=d_id%>">
-                                           <select class="form-select"  onchange="autoSubmit()" style="max-height: 35px; padding: 2px; padding-left: 3px;" name="status" id="statusSelect" required>
-                                               <option value="" disabled selected>Choose status</option>
-                                               <option value="Accept">Accept</option>
-                                               <option value="Declined">Declined</option>
-                                               <option value="Visited">Visited</option>
-                                               <option value="Not-Visited">Not-Visited</option>
-                                           </select>
-                                       </form>
-                                   <td>
                             </tr><%
                                         }
                                     }

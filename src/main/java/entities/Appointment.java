@@ -18,6 +18,7 @@ public class Appointment
     private String reason;
     private String date;
     private String time;
+    private String city;
     private String phone;
     private String status = "Pending";
 
