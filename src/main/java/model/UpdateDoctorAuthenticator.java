@@ -45,4 +45,38 @@ public class UpdateDoctorAuthenticator
         }
         return false;
     }
+
+    public boolean isUpdateDetails(Doctor doctor) {
+        String d_id = doctor.getD_id();
+        String password = doctor.getPassword();
+        Transaction tx = session.beginTransaction();
+        int i=0;
+        if(d_id != null && doctor.getPassword() != null)
+        {
+            Query query1 = session.createQuery("select password from doctors d where d.d_id = '" + d_id + "'");
+            String password1 = (String) query1.uniqueResult();
+
+            System.out.println(password +" = "+password1);
+
+            if (password.equals(password1))
+            {
+                Query query = session.createQuery("update doctors d set d.fname = :fname,d.lname = :lname,d.qualification = :qualification,d.specialization = :specialization,d.city = :city,d.address = :address where d.d_id = '" + d_id + "'");
+                query.setParameter("fname", doctor.getFname());
+                query.setParameter("lname", doctor.getLname());
+                query.setParameter("qualification", doctor.getQualification());
+                query.setParameter("specialization", doctor.getSpecialization());
+                query.setParameter("city", doctor.getCity());
+                query.setParameter("address", doctor.getAddress());
+                i = query.executeUpdate();
+
+                if (i > 0)
+                {
+                    return true;
+                }
+                return false;
+            }
+            return false;
+        }
+        return false;
+    }
 }

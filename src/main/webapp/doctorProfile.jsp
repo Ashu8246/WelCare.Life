@@ -26,6 +26,7 @@
 <body class="bg-light">
 <%
   String d_id = request.getParameter("d_id");
+
   Display display = new Display();
   Doctor doc = null;
   if(d_id == null)
@@ -110,14 +111,15 @@
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content border-0 shadow rounded-4 p-3">
       <div class="modal-header border-0 pb-0">
-        <h5 class="modal-title fw-bold" id="signupModalLabel">Verify Doctor Profile</h5>
+        <h5 class="modal-title fw-bold" id="signupModalLabel">Update Doctor Profile</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body pt-0 mt-1">
-        <form action="" method="post">
+        <form action="UpdateDoctorChecker" method="post">
+          <input type="hidden" name="type" value="details">
           <div class="mb-3">
-            <label for="signupEmail" class="form-label">Qualification</label>
-            <input type="email" name="d_id" class="form-control" id="signupEmail" placeholder="" value="<%=d_id%>" required readonly>
+            <label for="signupEmail" class="form-label">Doctor Id</label>
+            <input type="text" name="d_id" class="form-control" id="signupEmail" placeholder="" value="<%=d_id%>" required readonly>
           </div>
           <div class="row g-3 mb-3">
             <div class="col">
@@ -131,11 +133,11 @@
           </div>
           <div class="mb-3">
             <label for="signupEmail" class="form-label">Qualification</label>
-            <input type="email" name="qualification" class="form-control" id="signupEmail" value="<%=doc.getQualification()%>" placeholder="MBBS, MD, PHD" required>
+            <input type="text" name="qualification" class="form-control" id="signupEmail" value="<%=doc.getQualification()%>" placeholder="MBBS, MD, PHD" required>
           </div>
           <div class="mb-3">
             <label for="signupEmail" class="form-label">Specialization</label>
-            <input type="email" name="qualification" class="form-control" id="signupEmail" value="<%=doc.getSpecialization()%>" placeholder="Cardiologist / Dermetologist" required>
+            <input type="text" name="specialization" class="form-control" id="signupEmail" value="<%=doc.getSpecialization()%>" placeholder="Cardiologist / Dermetologist" required>
           </div>
           <div class="row g-3 mb-3">
             <div class="col">
@@ -143,7 +145,7 @@
               <input type="text" name="city" class="form-control" id="firstName" value="<%=doc.getCity()%>" placeholder="First name" required>
             </div>
             <div class="col">
-              <label for="lastName" class="form-label">Last Name</label>
+              <label for="lastName" class="form-label">Address</label>
               <input type="text" name="address" class="form-control" id="lastName" value="<%=doc.getAddress()%>" placeholder="Last name" required>
             </div>
           </div>

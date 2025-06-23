@@ -22,13 +22,21 @@ public class UpdateDoctorChecker extends HttpServlet
     {
         String type = req.getParameter("type");
         String d_id = req.getParameter("d_id");
+        String fname = req.getParameter("fname");
+        String lname = req.getParameter("lname");
+        String qualification = req.getParameter("qualification");
+        String specialization = req.getParameter("specialization");
+        String password = req.getParameter("password");
+        String city = req.getParameter("city");
+        String address = req.getParameter("address");
 
         UpdateDoctorAuthenticator auth  = new UpdateDoctorAuthenticator();
+        Doctor doctor = new Doctor();
         HttpSession session = req.getSession(true);
         if(d_id != null && type != null)
         {
             if(type.equalsIgnoreCase("availability")) {
-                Doctor doctor = new Doctor();
+
                 doctor.setD_id(d_id);
                 boolean status = auth.isAvailability(doctor);
 
@@ -37,6 +45,30 @@ public class UpdateDoctorChecker extends HttpServlet
                     resp.sendRedirect("docHome.jsp");
                 }
                 else {
+                    resp.sendRedirect("docHome.jsp");
+                }
+            }
+            else if(type.equalsIgnoreCase("details"))
+            {
+                if(d_id != null && fname != null &&  lname != null && qualification != null && specialization != null && city != null && address != null)
+                {
+                    doctor.setD_id(d_id);
+                    doctor.setFname(fname);
+                    doctor.setLname(lname);
+                    doctor.setQualification(qualification);
+                    doctor.setSpecialization(specialization);
+                    doctor.setCity(city);
+                    doctor.setAddress(address);
+                    doctor.setPassword(password);
+
+                    boolean update = auth.isUpdateDetails(doctor);
+
+                    if (update) {
+                        resp.sendRedirect("docHome.jsp");
+                    } else {
+                        resp.sendRedirect("docHome.jsp");
+                    }
+                }else {
                     resp.sendRedirect("docHome.jsp");
                 }
             }
