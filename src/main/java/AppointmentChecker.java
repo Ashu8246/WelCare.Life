@@ -31,6 +31,8 @@ public class AppointmentChecker extends HttpServlet
         String phone = req.getParameter("phone");
         String status = req.getParameter("status");
         String reason_id = req.getParameter("reason_id");
+        String type = req.getParameter("type");
+        System.out.println(reason_id +" "+ type +" "+ status);
 
         Appointment appointment = new Appointment();
         AppointmentAuthenticator auth =  new AppointmentAuthenticator();
@@ -57,7 +59,7 @@ public class AppointmentChecker extends HttpServlet
                 resp.sendRedirect("appointment.jsp");
             }
         }
-        else if (status != null && status != "" && reason_id != null && reason_id != "")
+        else if (status != null && reason_id != null && type.equalsIgnoreCase("availability"))
         {
             //Set details to appointment entity
             appointment.setReason_id(Integer.parseInt(reason_id));

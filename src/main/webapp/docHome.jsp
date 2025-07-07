@@ -66,7 +66,7 @@
                     <a class="nav-link active" href="docHome.jsp">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#" onclick="submitProfileForm()">Profile</a>
+                    <a class="nav-link" href="doctorProfile.jsp" onclick="submitProfileForm()">Profile</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#about">About</a>
@@ -98,15 +98,37 @@
     <input type="hidden" name="d_id" value="<%=d_id%>">
 </form>
 
+<div class="modal fade" id="searchPatientModal" tabindex="-1" aria-labelledby="signupModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content border-0 shadow rounded-4 p-3">
+            <div class="modal-header border-0 pb-0">
+                <h5 class="modal-title fw-bold" id="signupModalLabel">Search Patient</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+                <form class="mt-3" action="patientDetails.jsp" method="post">
+                    <div class="row g-2 mb-2">
+                        <div class="col">
+                            <input type="text" class="form-control" name="pid" placeholder="Patient Id" required>
+                        </div>
+                    </div>
+                    <div class="text-center mt-3">
+                        <button type="submit" class="appointment-btn">Search</button>
+                    </div>
+                </form>
+        </div>
+    </div>
+</div>
+</div>
+
 <!-- Hero Section -->
 <section class="hero-section">
 
 </section>
 
 <section style="background: linear-gradient(white,#ACB6E5,#91a4ff);">
-<div class="container py-5">
+<div class="container py-5 ">
     <div class="row g-4">
-        <div class="container py-5" style=" max-width: 80vh;">
+        <div class="container py-4" style=" max-width: 80vh;">
             <div class="row g-4">
                 <div class="info-box border-primary"  >
                     <h5>Appointments</h5>
@@ -133,10 +155,10 @@
                             %>
                             <tr>
                                 <td><%=a.getPname()%></td>
-                                <td><%=a.getDate()%></td>
-                                <td><%if(a.getStatus().equalsIgnoreCase("Accepted"))
+                                <td><%=a.getReason()%></td>
+                                <td><%if(a.getStatus().equalsIgnoreCase("Confirmed"))
                             {
-                            %><h6 style="color: #20c997">Accepted</h6><%
+                            %><h6 style="color: #20c997">Confirmed</h6><%
                             }
                             else if (a.getStatus().equalsIgnoreCase("Rejected"))
                             {
@@ -157,8 +179,8 @@
                             %>
                             </td>
                                 <td>
-                                    <form id="statusForm" action="appointmentDetails.jsp" method="post">
-                                        <input type="hidden" name="reason_id" value="<%=a.getReason_id()%>" readonly>
+                                    <form action="appointmentDetails.jsp" method="post" >
+                                        <input type="hidden" name="reason_id" value="<%=a.getReason_id()%>">
                                         <button type="submit" class="appointment-btn">See Details</button>
                                     </form>
                                 </td>
@@ -174,84 +196,67 @@
                 </div>
             </div>
         </div>
-
-        <!-- Emergency Info -->
-        <div class="col-md-4">
-            <div class="info-box">
-                <h5>Availability Status </h5>
-                    <%
-                        if(doctor.getStatus() == 0)
-                        {
-                            %><h4 style="color: red">Not Available</h4><%
-                        }
-                        else
-                        {
-                            %><h4 style="color: #20c997">Available</h4><%
-                        }
-                %>
-                <p class="text-muted mt-3">
-                    To update Availability status use toggle button.
-                </p>
-                <form action="UpdateDoctorChecker" method="post">
-                    <input type="hidden" name="d_id" value="<%=doctor.getD_id()%>">
-                    <input type="hidden" name="type" value="availability">
-                <button class="emergency-btn" type="submit" style="margin-right: 20px;">
-                    <i class="bi"></i>
-                    <%
-                        if(doctor.getStatus() == 0)
-                        {
-                            %>Available<%
-                        }
-                        else {
-                            %>Not-Available<%
-                        }
-                    %>
-                </button >
-                </form>
-
-            </div>
-        </div>
-
-        <!-- Make Appointment -->
-        <div class="col-md-4">
-            <div class="info-box">
-                <h5>Make an Appointment</h5>
-                <form class="mt-3">
-                    <div class="row g-2 mb-2">
-                        <div class="col">
-                            <select class="form-select" required>
-                                <option value="">Select Department</option>
-                                <option>Cardiology</option>
-                                <option>Dentistry</option>
-                            </select>
-                        </div>
-                        <div class="col">
-                            <select class="form-select" required>
-                                <option value="">Select Doctor</option>
-                                <option>Dr. John</option>
-                                <option>Dr. Smith</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="row g-2 mb-2">
-                        <div class="col">
-                            <input type="text" class="form-control" placeholder="Name" required>
-                        </div>
-                        <div class="col">
-                            <input type="text" class="form-control" placeholder="Phone No" required>
-                        </div>
-                    </div>
-                    <div class="text-center mt-3">
-                        <button type="submit" class="appointment-btn">Book Appointment</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-
     </div>
 </div>
-</section>
 
+    <div class="container py-5">
+        <div class="row text-center justify-content-center">
+
+            <div class="col-md-3">
+                    <div class="block-box">
+
+                        <div class="block-icon"><i class="bi bi-calendar-check"></i></div>
+                        <div class="block-title">Update Availability</div>
+
+                        <%
+                            if(doctor.getStatus() == 0)
+                            {
+                        %><h5 style="color: red">Not Available</h5><%
+                    }
+                    else
+                    {
+                    %><h5 style="color: #20c997">Available</h5><%
+                        }
+                    %>
+                        <form action="UpdateDoctorChecker" method="post">
+                            <input type="hidden" name="d_id" value="<%=doctor.getD_id()%>">
+                            <input type="hidden" name="type" value="availability">
+                            <button class="emergency-btn" type="submit" >
+                                <i class="bi"></i>
+                                <%
+                                    if(doctor.getStatus() == 0)
+                                    {
+                                %>Available<%
+                            }
+                            else {
+                            %>Not-Available<%
+                                }
+                            %>
+                            </button >
+                        </form>
+                    </div>
+            </div>
+            <div class="col-md-3">
+                <a data-bs-toggle="modal" data-bs-target="#searchPatientModal" class="text-decoration-none text-dark">
+                    <div class="block-box">
+                        <div class="block-icon"><i class="bi bi-search"></i></div>
+                        <div class="block-title">Search Patient</div>
+                        <div class="block-text">To Search patient,<br> Enter Patient Id</div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-md-3">
+                <a data-bs-toggle="modal" data-bs-target="#searchPatientModal" class="text-decoration-none text-dark">
+                    <div class="block-box">
+                        <div class="block-icon"><i class="bi bi-signpost"></i></div>
+                        <div class="block-title">Address</div>
+                        <div class="block-text">198 West 21th Street,<br> Suite 721 New York NY 10016</div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
 
 <!-- Subscribe Section -->
 <section id="contact" class="subscribe-section">

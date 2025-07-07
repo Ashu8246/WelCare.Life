@@ -38,7 +38,6 @@
     font-weight: bold;
     display: inline-flex;
     align-items: center;
-    margin-bottom: 15px;
 }
 
 .emergency-btn i {
@@ -162,3 +161,42 @@ footer {
     font-weight: 600;
     color: #0d6efd;
 }
+.block-box {
+    background: #f8f9fa;
+    padding: 30px 20px;
+    text-align: center;
+    border-radius: 10px;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease-in-out;
+    height: 280px;
+    margin-bottom: 20px;
+}
+
+.block-box:hover {
+    transform: translateY(-5px);
+}
+
+.block-icon {
+    width: 80px;
+    height: 80px;
+    background-color: #e9f0ff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 15px;
+    font-size: 32px;
+    color: #1976ff;
+}
+
+.block-title {
+    font-weight: 600;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+}
+
+.block-text {
+    color: #666;
+    font-size: 15px;
+}
+

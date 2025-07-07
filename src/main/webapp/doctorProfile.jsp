@@ -162,12 +162,42 @@
   </div>
 </div>
 </div>
+<!-- Modal -->
+<div class="modal fade" id="updatePhotoModal" tabindex="-1" aria-labelledby="updatePhotoLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content border-0 shadow rounded-4 p-3">
+
+      <div class="modal-header border-0 pb-0">
+        <h5 class="modal-title fw-bold" id="updatePhotoLabel">Update Profile Photo</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+
+      <div class="modal-body text-center">
+        <!-- Rounded Profile Image -->
+        <img id="profilePreview" class="rounded-circle mb-3 shadow" src="images/img.png" alt="Doctor Profile" style="width: 300px; height: 300px; object-fit: cover;" />
+        <!-- Upload Form -->
+          <div class="d-flex justify-content-center gap-2 mt-3">
+            <form id="uploadForm" action="UpdateProfilePhotoChecker" method="post" enctype="multipart/form-data">
+            <label class="btn btn-outline-primary mb-0">
+              Add Photo
+              <input type="file" name="image" id="uploadPhoto" accept="image/*" hidden />
+            </label>
+            </form>
+            <!-- Delete Photo -->
+            <button type="button" class="btn btn-outline-danger" >Delete Photo</button>
+          </div>
+      </div>
+    </div>
+  </div>
+</div>
+
 <section style="background: linear-gradient(#91a4ff,#ACB6E5,#f6f7f8);margin-top: 5vh; padding: 5vh;">
 
   <div class="profile-container">
     <!-- Left Section -->
     <div class="profile-left">
-      <img class="profile-image" src="images/img.png" alt="Doctor Profile" />
+      <img class="profile-image" data-bs-toggle="modal" data-bs-target="#updatePhotoModal" src="images/img.png" alt="Doctor Profile" />
+
       <h4>Dr. <%=doc.getFname()+" "+doc.getLname()%></h4><%
       if(doc.getVerified().equalsIgnoreCase("verified"))
       {

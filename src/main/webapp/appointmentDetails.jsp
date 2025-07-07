@@ -31,7 +31,7 @@
     String reason_id = request.getParameter("reason_id");
 
     Display display = new Display();
-    Appointment appoint;
+    Appointment appoint = null;
     if(d_id == null)
     {
         response.sendRedirect("docHome.jsp");
@@ -67,7 +67,7 @@
                     <a class="nav-link active" href="docHome.jsp">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#" onclick="submitProfileForm()">Profile</a>
+                    <a class="nav-link" href="doctorProfile.jsp" onclick="submitProfileForm()">Profile</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#about">About</a>
@@ -94,7 +94,7 @@
             </div>
             <div class="modal-body pt-0">
                 <form action="AppointmentChecker" method="post">
-                    <input type="hidden" name="reasoon_id" value="<%=reason_id%>">
+                    <input type="hidden" name="reason_id" value="<%=reason_id%>">
                     <input type="hidden" name="type" value="availability">
                     <div class="row g-3 mb-3 mt-1">
                         <div class="mb-1">
@@ -127,33 +127,54 @@
 
         <div class="info-row">
             <div class="info-label">Patient Name</div>
-            <div class="info-value">John Doe</div>
+            <div class="info-value"><%=appoint.getPname()%></div>
         </div>
 
         <div class="info-row">
             <div class="info-label">Reason for Visit</div>
-            <div class="info-value">Routine Checkup</div>
+            <div class="info-value"><%=appoint.getReason()%></div>
         </div>
 
         <div class="info-row">
             <div class="info-label">Appointment Date</div>
-            <div class="info-value">22 June 2025</div>
+            <div class="info-value"><%=appoint.getDate()%></div>
         </div>
 
         <div class="info-row">
             <div class="info-label">Time</div>
-            <div class="info-value">10:30 AM</div>
+            <div class="info-value"><%=appoint.getTime()%></div>
         </div>
 
         <div class="info-row">
-            <div class="info-label">Address</div>
-            <div class="info-value">456 Health Ave, Indore</div>
+            <div class="info-label">City</div>
+            <div class="info-value"><%=appoint.getCity()%></div>
         </div>
 
         <div class="info-row">
             <div class="info-label">Status</div>
             <div class="info-value">
-                <span class="status-badge status-confirmed">Confirmed</span>
+                <%
+                    if(appoint.getStatus().equalsIgnoreCase("confirmed"))
+                    {
+                        %><span class="status-badge status-confirmed">Confirmed</span><%
+                    }
+                    else if(appoint.getStatus().equalsIgnoreCase("Rejected"))
+                    {
+                        %><span class="status-badge status-cancelled">Rejected</span><%
+                    }
+                    else if(appoint.getStatus().equalsIgnoreCase("visited"))
+                    {
+                        %><span class="status-badge status-confirmed">Visited</span><%
+                    }
+                    else if(appoint.getStatus().equalsIgnoreCase("not-visited"))
+                    {
+                        %><span class="status-badge status-pending">Not-Visited</span><%
+                    }
+                    else {
+                        %><span class="status-badge status-pending">Pending</span><%
+
+                    }
+                %>
             </div>
         </div>
         <!-- Update Status Button -->
@@ -203,6 +224,9 @@
         location.reload();
     }, 2000); // Refresh after 5 seconds
 
+    function submitProfileForm() {
+        document.getElementById('doctorProfile.jsp').submit();
+    }
 </script>
 </body>
 </html>
